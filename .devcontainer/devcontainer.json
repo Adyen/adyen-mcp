@@ -1,10 +1,13 @@
 {
   "name": "Adyen MCP Codespace",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
     }
+  },
+  "onCreateCommand": {
+    "dependencies": "cd typescript && npm install"
   },
   "customizations": {
     "vscode": {
