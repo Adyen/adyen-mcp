@@ -29,10 +29,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: cd typescript && npm install
-      - name: NPM Build
-        run: npm run build
+      - name: Install dependencies & build 
+        run: cd typescript && npm install && npm run build
 
   node-sonarqube:
     runs-on: ubuntu-latest
