@@ -30,7 +30,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm install
+        run: cd typescript && npm install
       - name: NPM Build
         run: npm run build
 
