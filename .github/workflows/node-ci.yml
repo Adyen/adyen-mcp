@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  node-build:
+  node-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,19 +31,3 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies & build 
         run: cd typescript && npm install && npm run build
-
-### Uncomment this when the repo is public, to allow sonarqube scanning.
-  # node-sonarqube:
-  #   runs-on: ubuntu-latest
-  #   if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-  #   permissions:
-  #     pull-requests: write
-
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
-  #     - name: SonarQube Scan
-  #       uses: SonarSource/sonarqube-scan-action@v5
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
