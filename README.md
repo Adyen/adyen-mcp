@@ -1,6 +1,20 @@
 ## Adyen MCP Server
 
-The Adyen Model Context Protocol server allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients.
+The Adyen Model Context Protocol server allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients. It currently supports the following tools:
+
+1. CheckoutAPI - Sessions
+   - Create a /sessions payment request
+   - Get the status of a payment session
+   - Get the available payment methods
+2. CheckoutAPI - Payment Links
+   - Create a payment link
+   - Update a payment link
+3. Modifications API - Cancel / Refund 
+   - Cancels an authorized payment
+   - Refunds a captured payment
+4. Management API
+   - Gets a list of merchant accounts for your company account
+
 
 ### Pilot Instructions
 0. Open this [survey]()
