@@ -1,20 +1,20 @@
 {
   "name": "Adyen MCP Codespace",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
+      "version": "latest"
     }
   },
+  "forwardPorts": [],
+  "postCreateCommand": "cd typescript && npm install && npm run build",
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot"
+        "github.copilot"
       ]
     }
   },
-  "postCreateCommand": "cd typescript && npm install && npm run build",
-  "forwardPorts": [],
   "portsAttributes": {},
-  "remoteUser": "vscode"
+  "remoteUser": "root"
 }
