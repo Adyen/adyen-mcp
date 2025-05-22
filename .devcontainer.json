@@ -1,0 +1,16 @@
+{
+  "name": "Adyen MCP Codespace",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot"
+      ]
+    }
+  },
+  "postCreateCommand": "cd typescript && npm install && npm run build",
+  "forwardPorts": [],
+  "portsAttributes": {},
+  "remoteUser": "vscode"
+}
