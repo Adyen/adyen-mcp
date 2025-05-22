@@ -6,9 +6,6 @@
       "version": "18"
     }
   },
-  "onCreateCommand": {
-    "dependencies": "cd typescript && npm install"
-  },
   "customizations": {
     "vscode": {
       "extensions": [
