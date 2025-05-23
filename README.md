@@ -43,16 +43,19 @@ Only use the new user’s API key for the MCP application and limit the roles to
 1. **Create a new codespace on Github.**
 ![](docs/images/0.png)
 
-2. **Replace `YOUR_ADYEN_API_KEY` with your [Adyen API Key](https://docs.adyen.com/development-resources/api-credentials/#generate-api-key) in `.vscode/mcp.json` and click start.**
+2. **Navigate to `.vscode/mcp.json`, replace `{ADYEN_API_KEY}` with your [Adyen API Key](https://docs.adyen.com/development-resources/api-credentials/#generate-api-key) and click start.**
 ![](docs/images/1.png)
 
-The MCP server should start, see indicator:
 
-![](docs/images/2.png)
+* Alternatively, the recommended best practice is to add your `ADYEN_API_KEY` to Codespaces [here](https://github.com/settings/codespaces/secrets/new. This securely injects the key into your Codespace environment:
+
+![](docs/images/codespaces-secret.png)
+
 
 
 3. **Open Github Copilot's chat and set it to `Agent` mode.**
-Note: You may need to enable 
+_Note: You may need to enable [Github Copilot](https://github.com/copilot) on your Github account._
+
 ![](docs/images/3.png)
 
 ![](docs/images/4.png)
