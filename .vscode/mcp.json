@@ -4,11 +4,12 @@
       "type": "stdio",
       "command": "node",
       "args": [
-          "/workspaces/adyen-mcp/typescript/dist/index.js", 
-          "--adyenApiKey", "YOUR_ADYEN_API_KEY",
-          "--env", "TEST"
+        "/workspaces/adyen-mcp/typescript/dist/index.js", 
+        "--adyenApiKey", "${ADYEN_API_KEY}",
+        "--env", "TEST"
       ],
       "env": {
+        "ADYEN_API_KEY": "${ADYEN_API_KEY}"
       }
     }
   }
