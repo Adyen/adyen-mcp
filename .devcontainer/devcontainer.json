@@ -12,19 +12,7 @@
     "vscode": {
       "extensions": [
         "github.copilot"
-      ],
-      "openFiles": [
-        ".vscode/mcp.json"
       ]
-    }
-  },
-  "remoteEnv": {
-    "ADYEN_API_KEY": "${localEnv:ADYEN_API_KEY}"
-  },
-  "secrets": {
-    "ADYEN_API_KEY": {
-      "description": "Enter your ADYEN_API_KEY secret. Ensure that the roles required for your Web Service user, specified in the README, are correctly configured.",
-      "documentationUrl": "https://docs.adyen.com/development-resources/api-credentials/#generate-api-key"
     }
   },
   "portsAttributes": {},

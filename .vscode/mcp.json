@@ -3,13 +3,8 @@
     "adyen-mcp-server": {
       "type": "stdio",
       "command": "node",
-      "args": [
-        "/workspaces/adyen-mcp/typescript/dist/index.js", 
-        "--adyenApiKey", "${env:ADYEN_API_KEY}", 
-        "--env", "TEST"
-      ],
+      "args": ["/workspaces/adyen-mcp/typescript/dist/index.js", "--adyenApiKey", "YOUR_ADYEN_API_KEY", "--env", "TEST"],
       "env": {
-        "ADYEN_API_KEY": "${env:ADYEN_API_KEY}",
       }
     }
   }
