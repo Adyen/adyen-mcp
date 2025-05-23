@@ -17,7 +17,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@adyen/api-library": "^26.0.0",
+    "@adyen/api-library": "^27.0.0",
     "@modelcontextprotocol/sdk": "^1.0.4",
     "zod": "^3.23.8"
   },

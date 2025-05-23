@@ -11,13 +11,15 @@ const APP_VERSION = "0.1.0";
 
 async function main() {
   const adyenConfig = getAdyenConfig();
+
   const options = {
     apiKey: adyenConfig.adyenApiKey,
-    environment: adyenConfig.env as Environment,
-    applicationName: APPLICATION_NAME,
+    environment: adyenConfig.env as Environment
   };
 
   const adyenClient = new Client(options);
+  adyenClient.setApplicationName(APPLICATION_NAME + " " + APP_VERSION);
+  
   if (options.environment === Environment.LIVE) {
     const livePrefix = adyenConfig.livePrefix;
     adyenClient.setEnvironment(options.environment, livePrefix);
