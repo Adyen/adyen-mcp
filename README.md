@@ -47,7 +47,7 @@ Only use the new user’s API key for the MCP application and limit the roles to
 ![](docs/images/1.png)
 
 
-* Alternatively, the recommended best practice is to add your `ADYEN_API_KEY` to Codespaces [here](https://github.com/settings/codespaces/secrets/new. This securely injects the key into your Codespace environment:
+* **Alternatively**, you may also add your `ADYEN_API_KEY` (TEST) to [Codespaces](https://github.com/settings/codespaces/secrets/new. This securely injects the key into your Codespace environment:
 
 ![](docs/images/codespaces-secret.png)
 
@@ -63,7 +63,7 @@ _Note: You may need to enable [Github Copilot](https://github.com/copilot) on yo
 
 4. **Enter some example prompts.**
 ```
-Create me a payment link of 42 euros with my merchant account
+Create a payment link of 42 euros with my merchant account
 ```
 
 ```
