@@ -1,0 +1,27 @@
+# Workflow to publish a new release on NPM
+# https://www.npmjs.com/package/@adyen/mcp
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    environment: release
+    env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+      - run: |
+          cd typescript
+          npm install
+          npm run build
+      - run: npm publish --access restricted
