@@ -7,12 +7,13 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Get the status of a payment session
    - Get the available payment methods
 2. CheckoutAPI - Payment Links
+   - Gets the status of a payment link
    - Create a payment link
-   - Update a payment link
-3. Modifications API - Cancel / Refund 
+   - Updates a payment link (force expiry of the link)
+4. Modifications API - Cancel / Refund 
    - Cancels an authorized payment
    - Refunds a captured payment
-4. Management API
+5. Management API
    - Gets a list of merchant accounts for your company account
 
 
