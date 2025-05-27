@@ -63,7 +63,7 @@ const getPaymentSession = async (
   try {
     return await checkoutAPI.PaymentsApi.getResultOfPaymentSession(sessionId);
   } catch (e) {
-    return "Failed to create checkout session. Error: " + JSON.stringify(e);
+    return "Failed to get the result of the payment session. Error: " + JSON.stringify(e);
   }
 };
 

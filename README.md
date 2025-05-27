@@ -4,7 +4,7 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 
 1. CheckoutAPI - Sessions
    - Create a /sessions payment request
-   - Get the status of a payment session
+   - Get the result of a payment session
    - Get the available payment methods
 2. CheckoutAPI - Payment Links
    - Gets the status of a payment link
