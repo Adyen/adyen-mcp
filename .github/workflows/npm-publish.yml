@@ -21,7 +21,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
       - run: |
+          set -e
           cd typescript
           npm install
           npm run build
-      - run: npm publish --access restricted
+          npm publish --access restricted
