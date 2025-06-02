@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { Client } from "@adyen/api-library";
@@ -7,7 +9,7 @@ import { Environment, getAdyenConfig } from "./configurations/configurations";
 
 const APPLICATION_NAME = "adyen-mcp-server";
 const APP_NAME = "Adyen MCP";
-const APP_VERSION = "0.1.0";
+const APP_VERSION = "0.1.1";
 
 async function main() {
   const adyenConfig = getAdyenConfig();
