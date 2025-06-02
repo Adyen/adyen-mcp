@@ -17,29 +17,6 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Gets a list of merchant accounts for your company account
 
 
-### Usage
-To run to the MCP server via `npx` you can execute:
-
-```
-npx -y @adyen/mcp --tools=all --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
-```
-
-Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
-
-```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --prefixurl=YOUR_PREFIX_URL
-```
-
-**Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
-* Management API - Accounts Read
-* Management API - Payment methods Read
-* Checkout Webservice Role
-* Merchant PAL Webservice Role
-
-Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
-Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
-
-
 ### How to run this on Github Codespaces
 1. **Create a new codespace on Github.**
 ![](docs/images/0.png)
@@ -70,6 +47,30 @@ Create a payment link of 42 euros with my merchant account
 ```
 List my merchant accounts
 ```
+
+
+
+### Usage
+To run to the MCP server via `npx` you can execute:
+
+```
+npx -y @adyen/mcp --tools=all --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
+```
+
+Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
+
+```
+npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --prefixurl=YOUR_PREFIX_URL
+```
+
+**Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
+* Management API - Accounts Read
+* Management API - Payment methods Read
+* Checkout Webservice Role
+* Merchant PAL Webservice Role
+
+Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
+Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
 
 
 ### License
