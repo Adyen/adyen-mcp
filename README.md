@@ -27,7 +27,7 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
 Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --prefixurl=YOUR_PREFIX_URL
+npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 

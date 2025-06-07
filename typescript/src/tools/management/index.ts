@@ -61,7 +61,7 @@ const getMerchantAccount = async (
         merchantId
     );
   } catch (e) {
-    return "Failed to get merchant accounts. Error: " + JSON.stringify(e);
+    return "Failed to get merchant account. Error: " + JSON.stringify(e);
   }
 };
 

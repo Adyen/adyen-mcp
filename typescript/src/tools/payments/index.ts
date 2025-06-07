@@ -88,7 +88,7 @@ const getPaymentMethods = async (
   try {
     return await checkoutAPI.PaymentsApi.paymentMethods(getCheckoutPaymentMethodsRequest);
   } catch (e) {
-    return "Failed to create checkout session. Error: " + JSON.stringify(e);
+    return "Failed to get payment methods. Error: " + JSON.stringify(e);
   }
 };
 
