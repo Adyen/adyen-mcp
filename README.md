@@ -34,6 +34,22 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_
    * _Note:_ You'll have to confirm the action after your prompt.
 
 
+Example usage in `.vscode`:
+```json
+{
+  "servers": {
+    "adyen-mcp-server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@adyen/mcp", "--adyenApiKey=YOUR_ADYEN_API_KEY", "--env=TEST"],
+      "env": {
+        "ADYEN_API_KEY": "${ADYEN_API_KEY}"
+      }
+    }
+  }
+}
+```
+
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
 * Management API - Accounts Read
 * Management API - Payment methods Read
