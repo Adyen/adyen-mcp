@@ -1,6 +1,6 @@
 ## Adyen MCP Server
 
-The Adyen Model Context Protocol server allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients. It currently supports the following tools:
+The Adyen Model Context Protocol (MCP) server allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients. It currently supports the following tools.
 
 1. CheckoutAPI - Sessions
    - Create a /sessions payment request
@@ -18,17 +18,21 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 
 
 ### Usage
-To run to the MCP server via `npx` you can execute:
+1. Run to the MCP server via `npx`, command:
 
 ```
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
 ```
 
-Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
+_Optionally_, if the environment is LIVE then you must also provide your Merchant URL, for example:
 
 ```
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
+
+2. Chat with the MCP server (in `Agent` mode) to allow it to perform actions.
+   * _Note:_ You'll have to confirm the action after your prompt.
+
 
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
 * Management API - Accounts Read
@@ -40,44 +44,13 @@ Adyen recommends creating a new webservice user and generating a new API key for
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
 
 
-### How to run this on Github Codespaces
-1. **Create a new codespace on Github.**
-![](docs/images/0.png)
-
-2. **Navigate to `.vscode/mcp.json`, replace `{ADYEN_API_KEY}` with your [Adyen API Key](https://docs.adyen.com/development-resources/api-credentials/#generate-api-key) and click start.**
-![](docs/images/1.png)
-
-
-* **Alternatively**, you may also add your `ADYEN_API_KEY` (TEST) to [Codespaces](https://github.com/settings/codespaces/secrets/new. This securely injects the key into your Codespace environment:
-
-![](docs/images/codespaces-secret.png)
-
-
-
-3. **Open Github Copilot's chat and set it to `Agent` mode.**
-_Note: You may need to enable [Github Copilot](https://github.com/copilot) on your Github account._
-
-![](docs/images/3.png)
-
-![](docs/images/4.png)
-
-
-4. **Enter some example prompts.**
-```
-Create a payment link of 42 euros with my merchant account
-```
-
-```
-List my merchant accounts
-```
-
 
 ### License
 MIT license. For more information, see the LICENSE file.
 
 
 ### Contributing
-We strongly encourage you to contribute to our repository. Find out more in our contribution guidelines
+We strongly encourage you to contribute to our repository. Find out more in our contribution guidelines. If you'd like to run this in [Codespaces, follow this guide](/CODESPACES_README.md).
 
 
 ### Support

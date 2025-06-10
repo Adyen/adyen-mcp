@@ -10,7 +10,8 @@
     "mcp": "./dist/index.js"
   },
   "contributors": [
-    "Leonardo Galesky <devrel@adyen.com>"
+    "Leonardo Galesky <devrel@adyen.com>",
+    "Kwok He Chu <devrel@adyen.com>"
   ],
   "scripts": {
     "build": "tsc",
