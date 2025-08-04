@@ -5,6 +5,8 @@ import {
   GET_MERCHANT_ACCOUNTS_NAME,
   LIST_MERCHANT_ACCOUNTS_DESCRIPTION,
   LIST_MERCHANT_ACCOUNTS_NAME,
+  LIST_MERCHANT_WEBHOOKS_NAME,
+  LIST_MERCHANT_WEBHOOKS_DESCRIPTION,
 } from "./constants";
 import { Tool } from "../types";
 
@@ -70,5 +72,40 @@ export const getMerchantAccountsTool: Tool = {
   description: GET_MERCHANT_ACCOUNTS_DESCRIPTION,
   arguments: getMerchantAccountRequestObject,
   invoke: getMerchantAccount,
+};
+
+const listMerchantWebhooksRequestShape: z.ZodRawShape = {
+  merchantId: z.string(),
+  pageSize: z.number(),
+  pageNumber: z.number(),
+};
+
+const listMerchantWebhooksRequestObject = z.object(
+    listMerchantWebhooksRequestShape
+);
+
+const listMerchantWebhooks = async (
+    client: Client,
+    listMerchantWebhooksRequest: z.infer<typeof listMerchantWebhooksRequestObject>
+) => {
+  const { merchantId, pageSize, pageNumber } = listMerchantWebhooksRequest;
+
+  const managementAPI = new ManagementAPI(client);
+  try {
+    return await managementAPI.WebhooksMerchantLevelApi.listAllWebhooks(
+        merchantId,
+        pageSize,
+        pageNumber
+    );
+  } catch (e) {
+    return "Failed to get webhooks. Error: " + JSON.stringify(e);
+  }
+};
+
+export const listMerchantWebhooksTool: Tool = {
+  name: LIST_MERCHANT_WEBHOOKS_NAME,
+  description: LIST_MERCHANT_WEBHOOKS_DESCRIPTION,
+  arguments: listMerchantWebhooksRequestObject,
+  invoke: listMerchantWebhooks,
 };
 
