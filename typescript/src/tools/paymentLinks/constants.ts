@@ -3,7 +3,7 @@ export const CREATE_PAYMENT_LINKS_DESCRIPTION = `Creates a payment link at Adyen
 
     Args:
         currency (str): A 3 character currency code (e.g., EUR for euros, USD for US dollars).
-        amount (int): The transaction amount in minor units.
+        value (int): The transaction amount in minor units.
         merchantAccount (str): The merchant account identifier.
         countryCode(str): The shopper's two-letter country code.
         reference(str): A reference that is used to uniquely identify the payment in future communications about the payment status.
@@ -12,14 +12,14 @@ export const CREATE_PAYMENT_LINKS_DESCRIPTION = `Creates a payment link at Adyen
         str: The raw response from the Adyen API, containing the payment link URL. And the linkId as \`id\`.
 
     Notes:
-        - The \`amount\` parameter should be specified in minor units, which is the smallest unit of the currency.
-          For example, for EUR, the minor unit is cents (1 EUR = 100 cents), so an amount of 10.99 EUR would be 1099.
+        - The \`value\` parameter should be specified in minor units, which is the smallest unit of the currency.
+          For example, for EUR, the minor unit is cents (1 EUR = 100 cents), so a value of 10.99 EUR would be 1099.
         - The \`currency\` parameter should be a valid 3 character currency code.
-        - \`currency\`, \`amount\`, \`merchantAccount\` and \`countryCode\` are all mandatory fields.
+        - \`currency\`, \`value\`, \`merchantAccount\` and \`countryCode\` are all mandatory fields.
           If necessary, ask the user to provide this data.
 
     Examples:
-        create_payment_link({currency: "EUR", amount: 1099, merchantAccount: "your_merchant_account", countryCode:"NL", reference: "myReference123"})
+        create_payment_link({currency: "EUR", value: 1099, merchantAccount: "your_merchant_account", countryCode:"NL", reference: "myReference123"})
         # Returns the raw response from the Adyen API, containing the payment link URL. And the linkId as \`id\`.`;
 
 export const GET_PAYMENT_LINK_NAME = "get_payment_link";
