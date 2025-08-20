@@ -9,7 +9,7 @@ import { Environment, getAdyenConfig } from "./configurations/configurations";
 
 const APPLICATION_NAME = "adyen-mcp-server";
 const APP_NAME = "Adyen MCP";
-const APP_VERSION = "0.2.1";
+const APP_VERSION = "0.2.2";
 
 async function main() {
   const adyenConfig = getAdyenConfig();
