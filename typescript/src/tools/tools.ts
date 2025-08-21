@@ -3,6 +3,7 @@ import { Tool } from "./types";
 import {cancelPaymentTool, refundPaymentTool} from "./modifications";
 import {createPaymentSessionTool, getPaymentMethodsTool, getPaymentSessionTool} from "./payments";
 import {getMerchantAccountsTool, listMerchantAccountsTool} from "./management";
+import * as terminals from "./terminals";
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -14,5 +15,6 @@ export const tools: Tool[] = [
   getPaymentMethodsTool,
   listMerchantAccountsTool,
   getMerchantAccountsTool,
-  cancelPaymentTool
+  cancelPaymentTool,
+  ...Object.values(terminals),
 ];
