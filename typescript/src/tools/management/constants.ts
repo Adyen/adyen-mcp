@@ -14,3 +14,15 @@ export const GET_MERCHANT_ACCOUNTS_DESCRIPTION = `
     Args:
         merchantId (str): The unique identifier of the merchant account.
    `;
+
+export const LIST_MERCHANT_WEBHOOKS_NAME = "list_merchant_webhooks";
+export const LIST_MERCHANT_WEBHOOKS_DESCRIPTION = `
+    Get a list of webhooks for a specific merchant account
+
+    Args:
+        merchantId (str): The unique identifier of the merchant account.
+        pageSize (int): The number of items to have on a page, maximum 100. The default is 10 items on a page.
+        pageNumber (int): The number of the page to fetch.
+   `;
+
+   

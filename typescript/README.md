@@ -15,7 +15,7 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Refunds a captured payment
 5. Management API
    - Gets a list of merchant accounts for your company account
-
+   - Gets a list of webhooks associated to your merchant account
 
 ### Usage
 To run to the MCP server via `npx` you can execute:
@@ -35,6 +35,7 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_
 * Management API - Payment methods Read
 * Checkout Webservice Role
 * Merchant PAL Webservice Role
+* Management API - Webhooks read
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
