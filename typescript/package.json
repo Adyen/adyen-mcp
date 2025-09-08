@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "jest",
+    "test": "vitest",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
@@ -25,11 +25,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/node": "^22.0.0",
-    "jest": "^30.0.0",
-    "ts-jest": "^29.1.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
   },
   "license": "MIT",
   "repository": {

@@ -1,4 +1,5 @@
 import { getAdyenConfig } from '../src/configurations/configurations';
+import { MockInstance } from 'vitest';
 
 describe('configurations', () => {
   // Store original process.argv to restore after tests
@@ -99,10 +100,10 @@ describe('configurations', () => {
     });
 
     describe('error handling and logging', () => {
-      let consoleSpy: jest.SpyInstance;
+      let consoleSpy: MockInstance;
 
       beforeEach(() => {
-        consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       });
 
       afterEach(() => {
