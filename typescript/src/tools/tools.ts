@@ -2,7 +2,7 @@ import { createPaymentLinkTool, getPaymentLinkTool, updatePaymentLinkTool } from
 import { Tool } from "./types";
 import {cancelPaymentTool, refundPaymentTool} from "./modifications";
 import {createPaymentSessionTool, getPaymentMethodsTool, getPaymentSessionTool} from "./payments";
-import {getMerchantAccountsTool, listMerchantAccountsTool} from "./management";
+import {getMerchantAccountsTool, listMerchantAccountsTool, listMerchantWebhooksTool} from "./management";
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -14,5 +14,6 @@ export const tools: Tool[] = [
   getPaymentMethodsTool,
   listMerchantAccountsTool,
   getMerchantAccountsTool,
-  cancelPaymentTool
+  cancelPaymentTool,
+  listMerchantWebhooksTool
 ];
