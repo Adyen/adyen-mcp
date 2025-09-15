@@ -7,14 +7,14 @@
   },
   "author": "Adyen",
   "bin": {
-    "mcp": "./dist/src/index.js"
+    "mcp": "./dist/index.js"
   },
   "contributors": [
     "Leonardo Galesky <devrel@adyen.com>",
     "Kwok He Chu <devrel@adyen.com>"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
     "test": "vitest",
     "test:coverage": "jest --coverage"
