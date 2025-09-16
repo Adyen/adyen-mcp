@@ -12,7 +12,7 @@ export const CREATE_TERMINAL_ACTION_DESCRIPTION = `Schedules a terminal action b
 
     Notes:
         - Corresponds to the Adyen Management API POST /terminals/scheduleActions endpoint.
-        - Your API credential must have the "Management API—Terminal actions read and write" role to make this request.
+        - Your API credential must have the "Management API - Terminal actions read and write" role to make this request.
 
     Examples:
         create_terminal_action({
@@ -41,7 +41,7 @@ export const GET_ANDROID_APP_DESCRIPTION = `Gets the details of the Android app.
 
     Notes:
         - Corresponds to the Adyen Management API GET /companies/{companyId}/androidApps/{id} endpoint.
-        - Your API credential must have the "Management API—Android files read" or "Management API—Android files read and write" role to make this request.
+        - Your API credential must have the "Management API - Android files read" or "Management API - Android files read and write" role to make this request.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -62,7 +62,7 @@ export const GET_TERMINAL_SETTINGS_DESCRIPTION = `Gets the terminal settings tha
         object | string: The Adyen API response object reflecting the terminal settings for the specified level.
 
     Notes:
-        - Your API credential must have the "Management API—Terminal settings read" or "Management API—Terminal settings read and write" role.
+        - Your API credential must have the "Management API - Terminal settings read" or "Management API - Terminal settings read and write" role.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -87,7 +87,7 @@ export const LIST_ANDROID_APPS_DESCRIPTION = `Gets a list of Android apps.
 
     Notes:
         - Corresponds to the Adyen Management API GET /companies/{companyId}/androidApps endpoint.
-        - Your API credential must have the "Management API—Android files read" or "Management API—Android files read and write" role to make this request.
+        - Your API credential must have the "Management API - Android files read" or "Management API - Android files read and write" role to make this request.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -110,7 +110,7 @@ export const LIST_ANDROID_CERTIFICATES_DESCRIPTION = `Gets a list of Android cer
 
     Notes:
         - Corresponds to the Adyen Management API GET /companies/{companyId}/androidCertificates endpoint.
-        - Your API credential must have the "Management API—Android files read" or "Management API—Android files read and write" role to make this request.
+        - Your API credential must have the "Management API - Android files read" or "Management API - Android files read and write" role to make this request.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -138,7 +138,7 @@ export const LIST_TERMINALS_DESCRIPTION = `Gets a list of payment terminals.
     Notes:
         - Corresponds to the Adyen Management API GET /terminals endpoint.
         - No parameters are required. If the user does not ask for the results to be filtered, do not include any parameters in the request.
-        - To make this request, your API credential must have the "Management API — Terminal actions read" role.
+        - To make this request, your API credential must have the "Management API - Terminals read" role.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -162,7 +162,7 @@ export const LIST_TERMINAL_ACTIONS_DESCRIPTION = `Gets a list of terminal action
 
     Notes:
         - Corresponds to the Adyen Management API GET /companies/{companyId}/terminalActions endpoint.
-        - Your API credential must have the "Management API—Terminal actions read" or "Management API—Terminal actions read and write" role to make this request.
+        - Your API credential must have the "Management API - Terminal actions read" or "Management API - Terminal actions read and write" role to make this request.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
@@ -190,7 +190,7 @@ export const REASSIGN_TERMINAL_DESCRIPTION = `Reassigns a payment terminal to a 
 
     Notes:
         - Corresponds to the Adyen Management API POST /terminals/{terminalId}/reassign endpoint.
-        - Your API credential must have the "Management API—Assign Terminal" role to make this request.
+        - Your API credential must have the "Management API - Assign Terminal" role to make this request.
         - When reassigning to a merchant account, you must specify the inventory field.
 
     Examples:
@@ -213,8 +213,8 @@ export const UPDATE_TERMINAL_SETTINGS_DESCRIPTION = `Updates the terminal settin
 
     Notes:
         - To change a parameter, include the full object that contains it. To restore a parameter to its inherited value, provide an empty value or omit the parameter.
-        - Your API credential must have the "Management API—Terminal settings read and write" role.
-        - For sensitive terminal settings, the "Management API—Terminal settings Advanced read and write" role is required.
+        - Your API credential must have the "Management API - Terminal settings read and write" role.
+        - For sensitive terminal settings, the "Management API - Terminal settings Advanced read and write" role is required.
         - In the live environment, requests to this endpoint are subject to rate limits.
 
     Examples:
