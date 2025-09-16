@@ -13,8 +13,18 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 4. Modifications API - Cancel / Refund 
    - Cancels an authorized payment
    - Refunds a captured payment
-5. Management API
+5. Management API - Accounts
    - Gets a list of merchant accounts for your company account
+6. Management API - Terminals
+   - Get a list of terminals
+   - Reassign a terminal
+   - Get Android app details
+   - Get a list of Android apps
+   - Get a list of Android certificates
+   - Create a terminal action
+   - Get a list of terminal actions
+   - Get terminal settings
+   - Update terminal settings
 
 
 ### Usage
@@ -35,6 +45,13 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_
 * Management API - Payment methods Read
 * Checkout Webservice Role
 * Merchant PAL Webservice Role
+* Management API - Terminals read
+* Management API — Assign Terminal
+* Management API — Terminal actions read
+* Management API — Terminal actions read and write
+* Management API — Android files read
+* Management API — Terminal settings read
+* Management API — Terminal settings read and write
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 

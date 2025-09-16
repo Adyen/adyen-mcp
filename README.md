@@ -1,4 +1,4 @@
-## Adyen MCP Server - Alpha (v0.2.1)
+## Adyen MCP Server - Alpha
 
 The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/development-resources/mcp-server/) allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients. It currently supports the following tools. Read more on our [Blog - Part 1](https://www.adyen.com/knowledge-hub/mcp-release).
 
@@ -13,9 +13,18 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
 4. Modifications API - Cancel / Refund 
    - Cancels an authorized payment
    - Refunds a captured payment
-5. Management API
+5. Management API - Accounts
    - Gets a list of merchant accounts for your company account
-
+6. Management API - Terminals
+   - Get a list of terminals
+   - Reassign a terminal
+   - Get Android app details
+   - Get a list of Android apps
+   - Get a list of Android certificates
+   - Create a terminal action
+   - Get a list of terminal actions
+   - Get terminal settings
+   - Update terminal settings
 
 ### Usage
 * Run to the MCP server via `npx`, command:
@@ -52,6 +61,13 @@ Example usage in `.vscode`:
 * Management API - Payment methods Read
 * Checkout Webservice Role
 * Merchant PAL Webservice Role
+* Management API - Terminals read
+* Management API — Assign Terminal
+* Management API — Terminal actions read
+* Management API — Terminal actions read and write
+* Management API — Android files read
+* Management API — Terminal settings read
+* Management API — Terminal settings read and write
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
