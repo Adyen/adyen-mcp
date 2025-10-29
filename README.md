@@ -1,39 +1,40 @@
 ## Adyen MCP Server - Alpha
 
-The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/development-resources/mcp-server/) allows you to integrate with Adyen APIs through LLMs function calling utilizing various Clients. It currently supports the following tools. Read more on our [Blog - Part 1](https://www.adyen.com/knowledge-hub/mcp-release).
+The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/development-resources/mcp-server/) allows you to integrate with Adyen APIs through LLMs function calling utilizing various clients. It currently supports the following tools. Read more on our [Blog - Part 1](https://www.adyen.com/knowledge-hub/mcp-release).
 
 1. CheckoutAPI - Sessions
-   - Create a /sessions payment request
-   - Get the result of a payment session
-   - Get the available payment methods
+   - Creates a /sessions payment request - POST [`/sessions`](https://docs.adyen.com/api-explorer/Checkout/71/post/sessions)
+   - Gets the result of a payment session - GET [`/sessions/{sessionId}`](https://docs.adyen.com/api-explorer/Checkout/71/get/sessions/(sessionId))
+   - Gets the available payment methods - POST [`/paymentMethods`](https://docs.adyen.com/api-explorer/Checkout/71/post/paymentMethods)
 2. CheckoutAPI - Payment Links
-   - Gets the status of a payment link
-   - Create a payment link
-   - Updates a payment link (force expiry of the link)
-4. Modifications API - Cancel / Refund 
-   - Cancels an authorized payment
-   - Refunds a captured payment
+   - Creates a payment link - POST [`/paymentLinks`](https://docs.adyen.com/api-explorer/Checkout/71/post/paymentLinks)
+   - Gets the status of a payment link - GET [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/get/paymentLinks/(linkId))
+   - Updates a payment link (force expiry of the link) - PATCH [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/patch/paymentLinks/(linkId)
+4. Checkout API - Modifications
+   - Cancels an authorized payment - POST [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/cancels)
+   - Refunds a captured payment - POST [`/payments/{paymentPspReference}/refunds`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/refunds)
 5. Management API - Accounts
-   - Gets a list of merchant accounts for your company account
+   - Gets a list of merchant accounts for your company account - GET [`/merchants`](https://docs.adyen.com/api-explorer/Management/latest/get/merchants)
 6. Management API - Terminals
-   - Get a list of terminals
-   - Reassign a terminal
-   - Get Android app details
-   - Get a list of Android apps
-   - Get a list of Android certificates
-   - Create a terminal action
-   - Get a list of terminal actions
-   - Get terminal settings
-   - Update terminal settings
+   - Gets a list of terminals - GET [`/terminals`](https://docs.adyen.com/api-explorer/Management/3/get/terminals)
+   - Reassigns a terminal - POST [`/terminals/{terminalId}/reassign`](https://docs.adyen.com/api-explorer/Management/3/post/terminals/(terminalId)/reassign)
+   - Gets a list of Android apps - GET [`/companies/{companyId}/androidApps`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/androidApps)
+   - Gets Android app details - GET [`/companies/{companyId}/androidApps/{id}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/androidApps/(id))
+   - Gets a list of Android certificates - GET [`/companies/{companyId}/androidCertificates`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/androidCertificates)
+   - Creates a terminal action - POST [`/terminals/scheduleActions`](https://docs.adyen.com/api-explorer/Management/3/post/terminals/scheduleActions)
+   - Gets a list of terminal actions - GET [`/companies/{companyId}/terminalActions`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalActions)
+   - Gets terminal settings - GET [`/companies/{companyId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalSettings)/ GET [`/merchants/{merchantId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/terminalSettings)/ GET [`/merchants/{merchantId}/stores/{reference}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/stores/(reference)/terminalSettings)/ GET [`/terminals/{terminalId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/terminals/(terminalId)/terminalSettings)
+   - Updates terminal settings - PATCH [`/companies/{companyId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/companies/(companyId)/terminalSettings)/ PATCH [`/merchants/{merchantId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/merchants/(merchantId)/terminalSettings)/ PATCH [`/merchants/{merchantId}/stores/{reference}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/merchants/(merchantId)/stores/(reference)/terminalSettings)/ PATCH [`/terminals/{terminalId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/terminals/(terminalId)/terminalSettings)
+
 
 ### Usage
-* Run to the MCP server via `npx`, command:
+* Run the MCP server via `npx` with the following command:
 
 ```
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
 ```
 
-_Optionally_, if the environment is LIVE then you must also provide your Merchant URL, for example:
+If you are using the LIVE environment then you must also provide your [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints/#live-url-prefix), for example:
 
 ```
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
