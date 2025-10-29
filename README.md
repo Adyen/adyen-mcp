@@ -9,7 +9,7 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
 2. CheckoutAPI - Payment Links
    - Creates a payment link - POST [`/paymentLinks`](https://docs.adyen.com/api-explorer/Checkout/71/post/paymentLinks)
    - Gets the status of a payment link - GET [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/get/paymentLinks/(linkId))
-   - Updates a payment link (force expiry of the link) - PATCH [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/patch/paymentLinks/(linkId)
+   - Updates a payment link (force expiry of the link) - PATCH [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/patch/paymentLinks/(linkId))
 4. Checkout API - Modifications
    - Cancels an authorized payment - POST [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/cancels)
    - Refunds a captured payment - POST [`/payments/{paymentPspReference}/refunds`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/refunds)
