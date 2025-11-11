@@ -5,7 +5,8 @@ import {
   CREATE_PAYMENT_SESSION_NAME,
   GET_PAYMENT_METHODS_DESCRIPTION,
   GET_PAYMENT_METHODS_NAME,
-  GET_PAYMENT_SESSION_DESCRIPTION, GET_PAYMENT_SESSION_NAME,
+  GET_PAYMENT_SESSION_DESCRIPTION,
+  GET_PAYMENT_SESSION_NAME,
 } from "./constants";
 import { Tool } from "../types";
 
@@ -21,7 +22,7 @@ const paymentSessionObject = z.object(paymentSessionRequestShape);
 
 const createPaymentSession = async (
   client: Client,
-  paymentSessionRequest: z.infer<typeof paymentSessionObject>
+  paymentSessionRequest: z.infer<typeof paymentSessionObject>,
 ) => {
   const { currency, value, merchantAccount, reference, returnUrl } =
     paymentSessionRequest;
@@ -48,22 +49,30 @@ const createPaymentSession = async (
 
 const getPaymentSessionRequestShape: z.ZodRawShape = {
   sessionId: z.string(),
+  sessionResult: z.string(),
 };
 
-const getPaymentSessionObject = z.object(getPaymentSessionRequestShape);
+const getResultOfPaymentSessionObject = z.object(getPaymentSessionRequestShape);
 
 const getPaymentSession = async (
-    client: Client,
-    getPaymentSessionRequest: z.infer<typeof paymentSessionObject>
+  client: Client,
+  getResultOfPaymentSessionRequest: z.infer<
+    typeof getResultOfPaymentSessionObject
+  >,
 ) => {
-  const { sessionId } =
-      getPaymentSessionRequest;
+  const { sessionId, sessionResult } = getResultOfPaymentSessionRequest;
 
   const checkoutAPI = new CheckoutAPI(client);
   try {
-    return await checkoutAPI.PaymentsApi.getResultOfPaymentSession(sessionId);
+    return await checkoutAPI.PaymentsApi.getResultOfPaymentSession(
+      sessionId,
+      sessionResult,
+    );
   } catch (e) {
-    return "Failed to get the result of the payment session. Error: " + JSON.stringify(e);
+    return (
+      "Failed to get the result of the payment session. Error: " +
+      JSON.stringify(e)
+    );
   }
 };
 
@@ -74,19 +83,21 @@ const getPaymentMethodsRequestShape: z.ZodRawShape = {
 const getPaymentMethodsObject = z.object(getPaymentMethodsRequestShape);
 
 const getPaymentMethods = async (
-    client: Client,
-    getPaymentMethodsRequest: z.infer<typeof getPaymentMethodsObject>
+  client: Client,
+  getPaymentMethodsRequest: z.infer<typeof getPaymentMethodsObject>,
 ) => {
-  const { merchantAccount } =
-      getPaymentMethodsRequest;
+  const { merchantAccount } = getPaymentMethodsRequest;
 
-  const getCheckoutPaymentMethodsRequest: Types.checkout.PaymentMethodsRequest = {
-    merchantAccount
-  }
+  const getCheckoutPaymentMethodsRequest: Types.checkout.PaymentMethodsRequest =
+    {
+      merchantAccount,
+    };
 
   const checkoutAPI = new CheckoutAPI(client);
   try {
-    return await checkoutAPI.PaymentsApi.paymentMethods(getCheckoutPaymentMethodsRequest);
+    return await checkoutAPI.PaymentsApi.paymentMethods(
+      getCheckoutPaymentMethodsRequest,
+    );
   } catch (e) {
     return "Failed to get payment methods. Error: " + JSON.stringify(e);
   }
@@ -102,7 +113,7 @@ export const createPaymentSessionTool: Tool = {
 export const getPaymentSessionTool: Tool = {
   name: GET_PAYMENT_SESSION_NAME,
   description: GET_PAYMENT_SESSION_DESCRIPTION,
-  arguments: getPaymentSessionObject,
+  arguments: getResultOfPaymentSessionObject,
   invoke: getPaymentSession,
 };
 

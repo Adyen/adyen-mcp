@@ -1,88 +1,79 @@
 import { parseArgs } from "node:util";
 import { ParseArgsConfig } from "util";
+import { Config } from "@adyen/api-library";
 
-export enum AdyenOptionKeys {
-  ApiKey = "adyenApiKey",
-  Environment = "env",
-  LivePrefix = "livePrefix",
-}
-
-export enum Environment {
+export enum AdyenEnvironment {
   LIVE = "LIVE",
   TEST = "TEST",
 }
 
-const mandatoryFields = [AdyenOptionKeys.ApiKey, AdyenOptionKeys.Environment];
-
-type AdyenConfig = {
-  [key in AdyenOptionKeys]: string;
-};
-
-const optionsConfig: ParseArgsConfig["options"] = {
-  [AdyenOptionKeys.ApiKey]: {
-    type: "string" as const,
-  },
-  [AdyenOptionKeys.Environment]: {
-    type: "string" as const,
-    default: Environment.TEST,
-  },
-  [AdyenOptionKeys.LivePrefix]: {
-    type: "string" as const,
-  },
-};
-
-function validateAdyenConfig(options: { [option: string]: any }) {
-  for (const key of mandatoryFields) {
-    if (
-      options[key] === undefined ||
-      options[key] === null ||
-      options[key] === ""
-    ) {
-      const errorMessage = `Missing or empty required argument: --${key}`;
-      throw new Error(errorMessage);
-    }
-  }
-
-  const environment = options[AdyenOptionKeys.Environment];
-  if (!Object.values(Environment).includes(environment)) {
-    throw new Error(
-      `Invalid environment: ${environment}. Expected one of:
-      ${Object.values(Environment).join(", ")}`
-    );
-  }
-
-  if (
-    environment === Environment.LIVE &&
-    !options[AdyenOptionKeys.LivePrefix]
-  ) {
-    throw new Error(
-      `Invalid prefix: ${
-        options[AdyenOptionKeys.LivePrefix]
-      } for Live environment, see: https://docs.adyen.com/development-resources/live-endpoints/.
-            Example: --${AdyenOptionKeys.LivePrefix} <your-url>`
-    );
-  }
-
-  return options as AdyenConfig;
+export enum ArgKeys {
+  ApiKey = "apiKey",
+  Environment = "environment",
+  LivePrefix = "liveEndpointUrlPrefix",
+  Username = "username",
+  Password = "password",
 }
 
-export function getAdyenConfig(
-  args: string[] = process.argv.slice(2)
-): AdyenConfig {
+const optionsConfig: ParseArgsConfig["options"] = {
+  [ArgKeys.ApiKey]: { type: "string" as const, short: "a" },
+  [ArgKeys.Username]: { type: "string" as const, short: "u" },
+  [ArgKeys.Password]: { type: "string" as const, short: "p" },
+  [ArgKeys.Environment]: {
+    type: "string" as const,
+    short: "e",
+    default: AdyenEnvironment.TEST,
+  },
+  [ArgKeys.LivePrefix]: { type: "string" as const, short: "l" },
+};
+
+export function getAdyenConfig(args: string[] = process.argv.slice(2)): Config {
   try {
-    const { values: parsedOptions } = parseArgs({
+    const { values } = parseArgs({
       options: optionsConfig,
       args,
       strict: true,
       allowPositionals: false,
     });
-    return validateAdyenConfig(parsedOptions);
+
+    const options = values as { [key: string]: any };
+
+    const environment = options[ArgKeys.Environment];
+    if (
+      !Object.values(AdyenEnvironment).includes(environment as AdyenEnvironment)
+    ) {
+      throw new Error(
+        `Invalid value for the --${ArgKeys.Environment} argument: "${environment}", expected values are: (TEST | LIVE)`,
+      );
+    }
+
+    // Check if we have either an API-key or basic-auth
+    const hasApiKey = !!options[ArgKeys.ApiKey];
+    const hasBasicAuth = !!(
+      options[ArgKeys.Username] && options[ArgKeys.Password]
+    );
+    if (!hasApiKey && !hasBasicAuth) {
+      throw new Error(
+        `Missing required credentials. Provide --${ArgKeys.ApiKey} OR --${ArgKeys.Username} and --${ArgKeys.Password}.`,
+      );
+    }
+
+    // Live URL prefix check
+    if (
+      options[ArgKeys.Environment] === AdyenEnvironment.LIVE &&
+      !options[ArgKeys.LivePrefix]
+    ) {
+      throw new Error(`Live environment requires --${ArgKeys.LivePrefix}.`);
+    }
+
+    // Map to adyen node library config object
+    return values as Config;
   } catch (error: any) {
     console.error("\nError parsing command-line arguments:");
     console.error(`  ${error.message}`);
     console.error("\nUsage examples:");
     console.error(
-      `  npx @adyen/mcp --${AdyenOptionKeys.ApiKey} <your-adyen-api-key> --${AdyenOptionKeys.Environment} <your-env>`
+      `  npx @adyen/mcp --${ArgKeys.ApiKey} <your-adyen-api-key> --${ArgKeys.Environment} <your-env>`,
     );
     throw error;
   }

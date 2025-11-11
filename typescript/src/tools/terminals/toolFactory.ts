@@ -14,7 +14,10 @@ export function createTool<T extends z.ZodRawShape>(config: {
 }): Tool {
   const argumentSchema = z.object(config.schema);
 
-  const invoke = async (client: Client, args: z.infer<typeof argumentSchema>) => {
+  const invoke = async (
+    client: Client,
+    args: z.infer<typeof argumentSchema>,
+  ) => {
     const managementAPI = new ManagementAPI(client);
     try {
       const result = await config.apiCall(managementAPI, args);

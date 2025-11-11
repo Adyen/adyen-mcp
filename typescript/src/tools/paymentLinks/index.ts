@@ -6,7 +6,7 @@ import {
   GET_PAYMENT_LINK_DESCRIPTION,
   GET_PAYMENT_LINK_NAME,
   UPDATE_PAYMENT_LINK_DESCRIPTION,
-  UPDATE_PAYMENT_LINK_NAME
+  UPDATE_PAYMENT_LINK_NAME,
 } from "./constants";
 import { Tool } from "../types";
 
@@ -22,7 +22,7 @@ const createPaymentLinkObject = z.object(createPaymentLinkRequestShape);
 
 const createPaymentLink = async (
   client: Client,
-  paymentRequest: z.infer<typeof createPaymentLinkObject>
+  paymentRequest: z.infer<typeof createPaymentLinkObject>,
 ) => {
   const { currency, value, merchantAccount, countryCode, reference } =
     paymentRequest;
@@ -54,14 +54,14 @@ const getPaymentLinkObject = z.object(getPaymentLinkRequestShape);
 
 const updatePaymentLinkRequestShape: z.ZodRawShape = {
   linkId: z.string(),
-  status: z.string()
+  status: z.string(),
 };
 
 const updatePaymentLinkObject = z.object(updatePaymentLinkRequestShape);
 
 const getPaymentLink = async (
   client: Client,
-  getPaymentLinkRequest: z.infer<typeof getPaymentLinkObject>
+  getPaymentLinkRequest: z.infer<typeof getPaymentLinkObject>,
 ) => {
   const { linkId } = getPaymentLinkRequest;
 
@@ -75,13 +75,15 @@ const getPaymentLink = async (
 
 const updatePaymentLink = async (
   client: Client,
-  updatePaymentLinkRequest: z.infer<typeof updatePaymentLinkObject>
+  updatePaymentLinkRequest: z.infer<typeof updatePaymentLinkObject>,
 ) => {
   const { linkId, status } = updatePaymentLinkRequest;
 
   const checkoutAPI = new CheckoutAPI(client);
   try {
-    return await checkoutAPI.PaymentLinksApi.updatePaymentLink(linkId, { status } );
+    return await checkoutAPI.PaymentLinksApi.updatePaymentLink(linkId, {
+      status,
+    });
   } catch (e) {
     return "Failed to update payment link. Error: " + JSON.stringify(e);
   }

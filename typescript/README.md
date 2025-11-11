@@ -31,13 +31,24 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 To run to the MCP server via `npx` you can execute:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
+npx -y @adyen/mcp --apiKey=YOUR_ADYEN_API_KEY --environment=TEST
 ```
 
 Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
+npx -y @adyen/mcp --apiKey=YOUR_ADYEN_API_KEY --environment=LIVE --liveEndpointUrlPrefix=YOUR_LIVE_PREFIX_URL
+```
+
+Additionally, you can run the MCP server with basic auth:
+
+```
+npx -y @adyen/mcp --username=YOUR_USER_NAME --password=YOUR_BASIC_AUTH_PASSWORD
+```
+
+Or in short:
+```
+npx -y @adyen/mcp -u YOUR_USER_NAME -p YOUR_BASIC_AUTH_PASSWORD -e LIVE -l YOUR_LIVE_PREFIX_URL
 ```
 
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 

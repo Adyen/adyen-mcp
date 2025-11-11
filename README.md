@@ -31,15 +31,26 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
 * Run the MCP server via `npx` with the following command:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
+npx -y @adyen/mcp --apiKey=YOUR_ADYEN_API_KEY --environment=TEST
 ```
 
 If you are using the LIVE environment then you must also provide your [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints/#live-url-prefix), for example:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
+npx -y @adyen/mcp --apiKey=YOUR_ADYEN_API_KEY --environment=LIVE --liveEndpointUrlPrefix=YOUR_LIVE_PREFIX_URL
 ```
 
+Additionally, you can run the MCP server with basic auth:
+
+```
+npx -y @adyen/mcp --username=YOUR_USER_NAME --password=YOUR_BASIC_AUTH_PASSWORD
+```
+
+Or in short:
+
+```
+npx -y @adyen/mcp -u YOUR_USER_NAME -p YOUR_BASIC_AUTH_PASSWORD -e LIVE -l YOUR_LIVE_PREFIX_URL
+```
 
 Example usage in `.vscode`:
 ```json
@@ -48,7 +59,7 @@ Example usage in `.vscode`:
     "adyen-mcp-server": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@adyen/mcp", "--adyenApiKey=YOUR_ADYEN_API_KEY", "--env=TEST"],
+      "args": ["-y", "@adyen/mcp", "--apiKey=YOUR_ADYEN_API_KEY", "--env=TEST"],
       "env": {
         "ADYEN_API_KEY": "${ADYEN_API_KEY}"
       }

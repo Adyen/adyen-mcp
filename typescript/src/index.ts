@@ -2,30 +2,22 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { Client } from "@adyen/api-library";
+import { Client, Config } from "@adyen/api-library";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
 import { tools } from "./tools/tools.js";
-import { Environment, getAdyenConfig } from "./configurations/configurations";
+import { getAdyenConfig } from "./configurations/configurations";
 
 const APPLICATION_NAME = "adyen-mcp-server";
 const APP_NAME = "Adyen MCP";
 const APP_VERSION = "0.3.0";
 
 async function main() {
-  const adyenConfig = getAdyenConfig();
+  const config: Config = getAdyenConfig();
 
-  const options = {
-    apiKey: adyenConfig.adyenApiKey,
-    environment: adyenConfig.env as Environment
-  };
-
-  const adyenClient = new Client(options);
-  adyenClient.setApplicationName(APPLICATION_NAME + " " + APP_VERSION);
-  
-  if (options.environment === Environment.LIVE) {
-    const livePrefix = adyenConfig.livePrefix;
-    adyenClient.setEnvironment(options.environment, livePrefix);
-  }
+  const adyenClient = new Client({
+      ...config,
+      applicationName: `${APPLICATION_NAME} ${APP_VERSION}`,
+  });
 
   const server = new McpServer({
     name: APP_NAME,
@@ -37,7 +29,7 @@ async function main() {
       tool.name,
       tool.description,
       tool.arguments.shape,
-      async (args: any, _extra: RequestHandlerExtra <any, any>) => {
+      async (args: any, _extra: RequestHandlerExtra<any, any>) => {
         const result = await tool.invoke(adyenClient, args);
         return {
           content: [
@@ -47,16 +39,14 @@ async function main() {
             },
           ],
         };
-      }
+      },
     );
   }
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }
 
-try {
-  main();
-} catch (e) {
+main().catch((e) => {
   console.error("An error occurred during main execution of Adyen MCP:", e);
   process.exit(1);
-}
+})

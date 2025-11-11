@@ -44,7 +44,7 @@ export const GET_PAYMENT_SESSION_DESCRIPTION = `
     
     Args:
         sessionId (str): A unique identifier of the session.
-`
+`;
 
 export const GET_PAYMENT_METHODS_NAME = "get_payment_methods";
 export const GET_PAYMENT_METHODS_DESCRIPTION = `
@@ -52,4 +52,4 @@ export const GET_PAYMENT_METHODS_DESCRIPTION = `
     
     Args:
         merchantAccount (str): A unique identifier of the session.
-`
+`;

@@ -1,17 +1,17 @@
-import { execSync } from 'child_process';
-import { existsSync, readdirSync, rmSync, readFileSync } from 'fs';
-import { resolve } from 'path';
+import { execSync } from "child_process";
+import { existsSync, readdirSync, rmSync, readFileSync } from "fs";
+import { resolve } from "path";
 
-describe('build', () => {
-  const projectRoot = resolve(__dirname, '..');
-  const distPath = resolve(projectRoot, 'dist');
-  const packageJsonPath = resolve(projectRoot, 'package.json');
+describe("build", () => {
+  const projectRoot = resolve(__dirname, "..");
+  const distPath = resolve(projectRoot, "dist");
+  const packageJsonPath = resolve(projectRoot, "package.json");
 
   let packageJson: { main?: string; bin?: Record<string, string> };
 
   beforeAll(() => {
     // Read and parse package.json
-    const packageJsonContent = readFileSync(packageJsonPath, 'utf-8');
+    const packageJsonContent = readFileSync(packageJsonPath, "utf-8");
     packageJson = JSON.parse(packageJsonContent);
 
     // Ensure the dist directory is clean before running the build
@@ -20,9 +20,9 @@ describe('build', () => {
     }
   });
 
-  it('should build successfully and create main and bin files', () => {
+  it("should build successfully and create main and bin files", () => {
     // Run the build command
-    execSync('npm run build', { stdio: 'inherit', cwd: projectRoot });
+    execSync("npm run build", { stdio: "inherit", cwd: projectRoot });
 
     // Check if the dist directory exists
     expect(existsSync(distPath)).toBe(true);
@@ -41,7 +41,7 @@ describe('build', () => {
 
     // Check that no test files are included in the build
     const distFiles = readdirSync(distPath);
-    const testFiles = distFiles.filter(file => file.endsWith('.test.js'));
+    const testFiles = distFiles.filter((file) => file.endsWith(".test.js"));
     expect(testFiles.length).toBe(0);
   });
 });
