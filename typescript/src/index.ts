@@ -6,6 +6,7 @@ import { Client } from "@adyen/api-library";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
 import { tools } from "./tools/tools.js";
 import { Environment, getAdyenConfig } from "./configurations/configurations";
+import z from "zod";
 
 const APPLICATION_NAME = "adyen-mcp-server";
 const APP_NAME = "Adyen MCP";
@@ -33,11 +34,13 @@ async function main() {
   });
 
   for (const tool of tools) {
-    server.tool(
+    server.registerTool(
       tool.name,
-      tool.description,
-      tool.arguments.shape,
-      async (args: any, _extra: RequestHandlerExtra <any, any>) => {
+      {
+        description: tool.description,
+        inputSchema: tool.arguments.shape,
+      },
+      async (args: any, _extra: RequestHandlerExtra<any, any>) => {
         const result = await tool.invoke(adyenClient, args);
         return {
           content: [
@@ -50,6 +53,7 @@ async function main() {
       }
     );
   }
+  
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }
