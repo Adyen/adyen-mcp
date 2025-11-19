@@ -25,6 +25,11 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Get a list of terminal actions
    - Get terminal settings
    - Update terminal settings
+7. Configuration API - Account Holders
+   - Get account holder details and its capability settings.
+8. Legal entity management API - Legal entities and onboarding links
+   - Get legal entity details and its KYC information. 
+   - Create an onboarding link for a legal entity. 
 
 
 ### Usage
