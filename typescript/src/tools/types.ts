@@ -8,6 +8,6 @@ export interface Tool {
    */
   name: string;
   description: string;
-  arguments: z.ZodObject<any>;
+  arguments: z.ZodObject<z.ZodRawShape>;
   invoke: (adyenClient: Client, args: any) => Promise<any>;
 }
