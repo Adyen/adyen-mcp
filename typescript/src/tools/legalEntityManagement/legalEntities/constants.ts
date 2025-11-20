@@ -1,4 +1,4 @@
-export const GET_LEGAL_ENTITY_NAME = "get_legal_entity";        
+export const GET_LEGAL_ENTITY_NAME = 'get_legal_entity';
 export const GET_LEGAL_ENTITY_DESCRIPTION = `Gets all of the details about a legal entity.
 
     Args:

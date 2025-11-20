@@ -1,28 +1,30 @@
 #!/usr/bin/env node
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { Client } from "@adyen/api-library";
-import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol.js";
-import { tools } from "./tools/tools.js";
-import { Environment, getAdyenConfig } from "./configurations/configurations";
-import z from "zod";
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { Client } from '@adyen/api-library';
+import { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
+import { tools } from './tools/tools.js';
+import {
+  Environment,
+  getAdyenConfig,
+} from './configurations/configurations.js';
 
-const APPLICATION_NAME = "adyen-mcp-server";
-const APP_NAME = "Adyen MCP";
-const APP_VERSION = "0.3.0";
+const APPLICATION_NAME = 'adyen-mcp-server';
+const APP_NAME = 'Adyen MCP';
+const APP_VERSION = '0.3.0';
 
 async function main() {
   const adyenConfig = getAdyenConfig();
 
   const options = {
     apiKey: adyenConfig.adyenApiKey,
-    environment: adyenConfig.env as Environment
+    environment: adyenConfig.env as Environment,
   };
 
   const adyenClient = new Client(options);
-  adyenClient.setApplicationName(APPLICATION_NAME + " " + APP_VERSION);
-  
+  adyenClient.setApplicationName(APPLICATION_NAME + ' ' + APP_VERSION);
+
   if (options.environment === Environment.LIVE) {
     const livePrefix = adyenConfig.livePrefix;
     adyenClient.setEnvironment(options.environment, livePrefix);
@@ -45,15 +47,15 @@ async function main() {
         return {
           content: [
             {
-              type: "text",
+              type: 'text',
               text: JSON.stringify(result),
             },
           ],
         };
-      }
+      },
     );
   }
-  
+
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }
@@ -61,6 +63,6 @@ async function main() {
 try {
   main();
 } catch (e) {
-  console.error("An error occurred during main execution of Adyen MCP:", e);
+  console.error('An error occurred during main execution of Adyen MCP:', e);
   process.exit(1);
 }
