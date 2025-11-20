@@ -10,12 +10,12 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Gets the status of a payment link
    - Create a payment link
    - Updates a payment link (force expiry of the link)
-4. Modifications API - Cancel / Refund 
+3. Modifications API - Cancel / Refund 
    - Cancels an authorized payment
    - Refunds a captured payment
-5. Management API - Accounts
+4. Management API - Accounts
    - Gets a list of merchant accounts for your company account
-6. Management API - Terminals
+5. Management API - Terminals
    - Get a list of terminals
    - Reassign a terminal
    - Get Android app details
@@ -25,12 +25,14 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
    - Get a list of terminal actions
    - Get terminal settings
    - Update terminal settings
+6. Management API - Webhooks
+   - List all webhooks
+   - Get a webhook
 7. Configuration API - Account Holders
    - Get account holder details and its capability settings.
 8. Legal entity management API - Legal entities and onboarding links
    - Get legal entity details and its KYC information. 
    - Create an onboarding link for a legal entity. 
-
 
 ### Usage
 To run to the MCP server via `npx` you can execute:
@@ -57,6 +59,7 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_
 * Management API — Android files read
 * Management API — Terminal settings read
 * Management API — Terminal settings read and write
+* Management API — Webhooks read
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
