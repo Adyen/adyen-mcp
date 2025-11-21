@@ -10,12 +10,12 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - Creates a payment link - POST [`/paymentLinks`](https://docs.adyen.com/api-explorer/Checkout/71/post/paymentLinks)
    - Gets the status of a payment link - GET [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/get/paymentLinks/(linkId))
    - Updates a payment link (force expiry of the link) - PATCH [`/paymentLinks/{linkId}`](https://docs.adyen.com/api-explorer/Checkout/71/patch/paymentLinks/(linkId))
-4. Checkout API - Modifications
+3. Checkout API - Modifications
    - Cancels an authorized payment - POST [`/payments/{paymentPspReference}/cancels`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/cancels)
    - Refunds a captured payment - POST [`/payments/{paymentPspReference}/refunds`](https://docs.adyen.com/api-explorer/Checkout/latest/post/payments/(paymentPspReference)/refunds)
-5. Management API - Accounts
+4. Management API - Accounts
    - Gets a list of merchant accounts for your company account - GET [`/merchants`](https://docs.adyen.com/api-explorer/Management/latest/get/merchants)
-6. Management API - Terminals
+5. Management API - Terminals
    - Gets a list of terminals - GET [`/terminals`](https://docs.adyen.com/api-explorer/Management/3/get/terminals)
    - Reassigns a terminal - POST [`/terminals/{terminalId}/reassign`](https://docs.adyen.com/api-explorer/Management/3/post/terminals/(terminalId)/reassign)
    - Gets a list of Android apps - GET [`/companies/{companyId}/androidApps`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/androidApps)
@@ -25,6 +25,11 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - Gets a list of terminal actions - GET [`/companies/{companyId}/terminalActions`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalActions)
    - Gets terminal settings - GET [`/companies/{companyId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalSettings)/ GET [`/merchants/{merchantId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/terminalSettings)/ GET [`/merchants/{merchantId}/stores/{reference}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/stores/(reference)/terminalSettings)/ GET [`/terminals/{terminalId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/get/terminals/(terminalId)/terminalSettings)
    - Updates terminal settings - PATCH [`/companies/{companyId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/companies/(companyId)/terminalSettings)/ PATCH [`/merchants/{merchantId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/merchants/(merchantId)/terminalSettings)/ PATCH [`/merchants/{merchantId}/stores/{reference}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/merchants/(merchantId)/stores/(reference)/terminalSettings)/ PATCH [`/terminals/{terminalId}/terminalSettings`](https://docs.adyen.com/api-explorer/Management/3/patch/terminals/(terminalId)/terminalSettings)
+6. Management API - Webhooks
+   - List all webhooks - GET [`/companies/{companyId}/webhooks`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/webhooks)
+   - List all webhooks - GET [`/merchants/{merchantId}/webhooks`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks)
+   - Get a webhook - GET [`/companies/{companyId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/webhooks/(webhookId))
+   - Get a webhook - GET [`/merchants/{merchantId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks/(webhookId))
 
 
 ### Usage
@@ -69,6 +74,7 @@ Example usage in `.vscode`:
 * Management API — Android files read
 * Management API — Terminal settings read
 * Management API — Terminal settings read and write
+* Management API — Webhooks read
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 

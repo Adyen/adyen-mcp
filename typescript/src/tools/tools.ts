@@ -7,6 +7,12 @@ import { terminalTools } from "./terminals";
 import { createHostedOnboardingLinkTool } from "./legalEntityManagement/onboardingLinks";
 import { getLegalEntityTool } from "./legalEntityManagement/legalEntities";
 import { getAccountHolderTool } from "./configuration/accountHolders";
+import {
+    getCompanyWebhookTool,
+    getMerchantWebhookTool,
+    listAllCompanyWebhooksTool,
+    listAllMerchantWebhooksTool,
+} from "./webhooks";
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -22,5 +28,9 @@ export const tools: Tool[] = [
   ...terminalTools,
   createHostedOnboardingLinkTool,
   getLegalEntityTool,
-  getAccountHolderTool
+  getAccountHolderTool,
+  listAllCompanyWebhooksTool,
+  getCompanyWebhookTool,
+  listAllMerchantWebhooksTool,
+  getMerchantWebhookTool
 ];
