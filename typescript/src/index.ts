@@ -10,7 +10,7 @@ import z from "zod";
 
 const APPLICATION_NAME = "adyen-mcp-server";
 const APP_NAME = "Adyen MCP";
-const APP_VERSION = "0.3.0";
+const APP_VERSION = "0.4.0";
 
 async function main() {
   const adyenConfig = getAdyenConfig();
