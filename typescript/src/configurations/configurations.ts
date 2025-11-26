@@ -1,15 +1,15 @@
-import { parseArgs } from "node:util";
-import { ParseArgsConfig } from "util";
+import { parseArgs } from 'node:util';
+import { ParseArgsConfig } from 'util';
 
 export enum AdyenOptionKeys {
-  ApiKey = "adyenApiKey",
-  Environment = "env",
-  LivePrefix = "livePrefix",
+  ApiKey = 'adyenApiKey',
+  Environment = 'env',
+  LivePrefix = 'livePrefix',
 }
 
 export enum Environment {
-  LIVE = "LIVE",
-  TEST = "TEST",
+  LIVE = 'LIVE',
+  TEST = 'TEST',
 }
 
 const mandatoryFields = [AdyenOptionKeys.ApiKey, AdyenOptionKeys.Environment];
@@ -18,16 +18,16 @@ type AdyenConfig = {
   [key in AdyenOptionKeys]: string;
 };
 
-const optionsConfig: ParseArgsConfig["options"] = {
+const optionsConfig: ParseArgsConfig['options'] = {
   [AdyenOptionKeys.ApiKey]: {
-    type: "string" as const,
+    type: 'string' as const,
   },
   [AdyenOptionKeys.Environment]: {
-    type: "string" as const,
+    type: 'string' as const,
     default: Environment.TEST,
   },
   [AdyenOptionKeys.LivePrefix]: {
-    type: "string" as const,
+    type: 'string' as const,
   },
 };
 
@@ -36,7 +36,7 @@ function validateAdyenConfig(options: { [option: string]: any }) {
     if (
       options[key] === undefined ||
       options[key] === null ||
-      options[key] === ""
+      options[key] === ''
     ) {
       const errorMessage = `Missing or empty required argument: --${key}`;
       throw new Error(errorMessage);
@@ -47,7 +47,7 @@ function validateAdyenConfig(options: { [option: string]: any }) {
   if (!Object.values(Environment).includes(environment)) {
     throw new Error(
       `Invalid environment: ${environment}. Expected one of:
-      ${Object.values(Environment).join(", ")}`
+      ${Object.values(Environment).join(', ')}`,
     );
   }
 
@@ -59,7 +59,7 @@ function validateAdyenConfig(options: { [option: string]: any }) {
       `Invalid prefix: ${
         options[AdyenOptionKeys.LivePrefix]
       } for Live environment, see: https://docs.adyen.com/development-resources/live-endpoints/.
-            Example: --${AdyenOptionKeys.LivePrefix} <your-url>`
+            Example: --${AdyenOptionKeys.LivePrefix} <your-url>`,
     );
   }
 
@@ -67,7 +67,7 @@ function validateAdyenConfig(options: { [option: string]: any }) {
 }
 
 export function getAdyenConfig(
-  args: string[] = process.argv.slice(2)
+  args: string[] = process.argv.slice(2),
 ): AdyenConfig {
   try {
     const { values: parsedOptions } = parseArgs({
@@ -78,11 +78,11 @@ export function getAdyenConfig(
     });
     return validateAdyenConfig(parsedOptions);
   } catch (error: any) {
-    console.error("\nError parsing command-line arguments:");
+    console.error('\nError parsing command-line arguments:');
     console.error(`  ${error.message}`);
-    console.error("\nUsage examples:");
+    console.error('\nUsage examples:');
     console.error(
-      `  npx @adyen/mcp --${AdyenOptionKeys.ApiKey} <your-adyen-api-key> --${AdyenOptionKeys.Environment} <your-env>`
+      `  npx @adyen/mcp --${AdyenOptionKeys.ApiKey} <your-adyen-api-key> --${AdyenOptionKeys.Environment} <your-env>`,
     );
     throw error;
   }

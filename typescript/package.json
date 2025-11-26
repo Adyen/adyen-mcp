@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=18"
   },
+  "type": "module",
   "author": "Adyen",
   "bin": {
     "mcp": "./dist/index.js"
@@ -17,7 +18,9 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
     "test": "vitest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "lint": "eslint \"**/*.ts\"",
+    "prettier": "prettier --check \"**/*.ts\" --write"
   },
   "dependencies": {
     "@adyen/api-library": "^27.0.0",
@@ -26,8 +29,12 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
     "typescript": "^5.0.0",
-    "vitest": "^4.0.0"
+    "vitest": "^3.2.4",
+    "typescript-eslint": "^8.47.0"
   },
   "license": "MIT",
   "repository": {

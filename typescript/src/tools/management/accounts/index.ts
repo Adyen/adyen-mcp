@@ -1,12 +1,12 @@
-import { z } from "zod";
-import { Client, ManagementAPI } from "@adyen/api-library";
+import { z } from 'zod';
+import { Client, ManagementAPI } from '@adyen/api-library';
 import {
   GET_MERCHANT_ACCOUNTS_DESCRIPTION,
   GET_MERCHANT_ACCOUNTS_NAME,
   LIST_MERCHANT_ACCOUNTS_DESCRIPTION,
   LIST_MERCHANT_ACCOUNTS_NAME,
-} from "./constants";
-import { Tool } from "../types";
+} from './constants.js';
+import { Tool } from '../../types.js';
 
 const listMerchantAccountsRequestShape: z.ZodRawShape = {
   pageSize: z.number(),
@@ -14,12 +14,14 @@ const listMerchantAccountsRequestShape: z.ZodRawShape = {
 };
 
 const listMerchantAccountsRequestObject = z.object(
-  listMerchantAccountsRequestShape
+  listMerchantAccountsRequestShape,
 );
 
 const listMerchantAccounts = async (
   client: Client,
-  listMerchantAccountsRequest: z.infer<typeof listMerchantAccountsRequestObject>
+  listMerchantAccountsRequest: z.infer<
+    typeof listMerchantAccountsRequestObject
+  >,
 ) => {
   const { pageSize, pageNumber } = listMerchantAccountsRequest;
 
@@ -27,10 +29,10 @@ const listMerchantAccounts = async (
   try {
     return await managementAPI.AccountMerchantLevelApi.listMerchantAccounts(
       pageNumber,
-      pageSize
+      pageSize,
     );
   } catch (e) {
-    return "Failed to list merchant accounts. Error: " + JSON.stringify(e);
+    return 'Failed to list merchant accounts. Error: ' + JSON.stringify(e);
   }
 };
 
@@ -42,26 +44,26 @@ export const listMerchantAccountsTool: Tool = {
 };
 
 const getMerchantAccountRequestShape: z.ZodRawShape = {
-  merchantId: z.string()
+  merchantId: z.string(),
 };
 
 const getMerchantAccountRequestObject = z.object(
-    getMerchantAccountRequestShape
+  getMerchantAccountRequestShape,
 );
 
 const getMerchantAccount = async (
-    client: Client,
-    getMerchantAccountRequest: z.infer<typeof getMerchantAccountRequestObject>
+  client: Client,
+  getMerchantAccountRequest: z.infer<typeof getMerchantAccountRequestObject>,
 ) => {
   const { merchantId } = getMerchantAccountRequest;
 
   const managementAPI = new ManagementAPI(client);
   try {
     return await managementAPI.AccountMerchantLevelApi.getMerchantAccount(
-        merchantId
+      merchantId,
     );
   } catch (e) {
-    return "Failed to get merchant account. Error: " + JSON.stringify(e);
+    return 'Failed to get merchant account. Error: ' + JSON.stringify(e);
   }
 };
 
@@ -71,4 +73,3 @@ export const getMerchantAccountsTool: Tool = {
   arguments: getMerchantAccountRequestObject,
   invoke: getMerchantAccount,
 };
-

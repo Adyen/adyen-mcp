@@ -1,4 +1,4 @@
-export const CREATE_TERMINAL_ACTION_NAME = "create_terminal_action";
+export const CREATE_TERMINAL_ACTION_NAME = 'create_terminal_action';
 export const CREATE_TERMINAL_ACTION_DESCRIPTION = `Schedules a terminal action by specifying the action and the terminals that the action must be applied to.
 
     Args:
@@ -29,7 +29,7 @@ export const CREATE_TERMINAL_ACTION_DESCRIPTION = `Schedules a terminal action b
         })
         # Returns a success or error message.`;
 
-export const GET_ANDROID_APP_NAME = "get_android_app";
+export const GET_ANDROID_APP_NAME = 'get_android_app';
 export const GET_ANDROID_APP_DESCRIPTION = `Gets the details of the Android app.
 
     Args:
@@ -51,7 +51,7 @@ export const GET_ANDROID_APP_DESCRIPTION = `Gets the details of the Android app.
         })
         # Returns the Adyen API response object listing Android app, or an error string.`;
 
-export const GET_TERMINAL_SETTINGS_NAME = "get_terminal_settings";
+export const GET_TERMINAL_SETTINGS_NAME = 'get_terminal_settings';
 export const GET_TERMINAL_SETTINGS_DESCRIPTION = `Gets the terminal settings that are configured for a specific level.
 
     Args:
@@ -72,7 +72,7 @@ export const GET_TERMINAL_SETTINGS_DESCRIPTION = `Gets the terminal settings tha
         })
         # Returns the terminal settings object for the specified level, or an error string.`;
 
-export const LIST_ANDROID_APPS_NAME = "list_android_apps";
+export const LIST_ANDROID_APPS_NAME = 'list_android_apps';
 export const LIST_ANDROID_APPS_DESCRIPTION = `Gets a list of Android apps.
 
     Args:
@@ -96,7 +96,7 @@ export const LIST_ANDROID_APPS_DESCRIPTION = `Gets a list of Android apps.
         })
         # Returns the Adyen API response object listing Android apps for "TestCompany", or an error string.`;
 
-export const LIST_ANDROID_CERTIFICATES_NAME = "list_android_certificates";
+export const LIST_ANDROID_CERTIFICATES_NAME = 'list_android_certificates';
 export const LIST_ANDROID_CERTIFICATES_DESCRIPTION = `Gets a list of Android certificates.
 
     Args:
@@ -119,7 +119,7 @@ export const LIST_ANDROID_CERTIFICATES_DESCRIPTION = `Gets a list of Android cer
         })
         # Returns the Adyen API response object listing Android certificates for "TestCompany", or an error string.`;
 
-export const LIST_TERMINALS_NAME = "list_terminals";
+export const LIST_TERMINALS_NAME = 'list_terminals';
 export const LIST_TERMINALS_DESCRIPTION = `Gets a list of payment terminals.
 
     Args:
@@ -147,7 +147,7 @@ export const LIST_TERMINALS_DESCRIPTION = `Gets a list of payment terminals.
         })
         # Returns the Adyen API response object listing terminals with "P400" in their ID, or an error string.`;
 
-export const LIST_TERMINAL_ACTIONS_NAME = "list_terminal_actions";
+export const LIST_TERMINAL_ACTIONS_NAME = 'list_terminal_actions';
 export const LIST_TERMINAL_ACTIONS_DESCRIPTION = `Gets a list of terminal actions.
 
     Args:
@@ -175,7 +175,7 @@ export const LIST_TERMINAL_ACTIONS_DESCRIPTION = `Gets a list of terminal action
         })
         # Returns the Adyen API response object listing terminal actions for "TestCompany", or an error string.`;
 
-export const REASSIGN_TERMINAL_NAME = "reassign_terminal";
+export const REASSIGN_TERMINAL_NAME = 'reassign_terminal';
 export const REASSIGN_TERMINAL_DESCRIPTION = `Reassigns a payment terminal to a different company account, merchant account, or store.
 
     Args:
@@ -200,7 +200,7 @@ export const REASSIGN_TERMINAL_DESCRIPTION = `Reassigns a payment terminal to a 
         })
         # Returns a success or error message.`;
 
-export const UPDATE_TERMINAL_SETTINGS_NAME = "update_terminal_settings";
+export const UPDATE_TERMINAL_SETTINGS_NAME = 'update_terminal_settings';
 export const UPDATE_TERMINAL_SETTINGS_DESCRIPTION = `Updates the terminal settings that are configured for a specific level.
 
     Args:
