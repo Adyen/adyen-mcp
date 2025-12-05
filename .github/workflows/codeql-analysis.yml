@@ -3,7 +3,11 @@ name: "Code scanning - action"
 on:
   push:
   pull_request:
-  
+
+permissions:
+  contents: read # For checking out the code
+  security-events: write # For uploading the CodeQL results
+
 jobs:
   CodeQL-Build:
 
