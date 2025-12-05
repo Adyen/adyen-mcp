@@ -41,7 +41,7 @@ describe('build', () => {
 
     // Check that no test files are included in the build
     const distFiles = readdirSync(distPath);
-    const testFiles = distFiles.filter(file => file.endsWith('.test.js'));
+    const testFiles = distFiles.filter((file) => file.endsWith('.test.js'));
     expect(testFiles.length).toBe(0);
   });
 });

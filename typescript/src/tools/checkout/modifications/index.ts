@@ -1,12 +1,12 @@
-import { z } from "zod";
-import { CheckoutAPI, Client, Types } from "@adyen/api-library";
+import { z } from 'zod';
+import { CheckoutAPI, Client, Types } from '@adyen/api-library';
 import {
   CANCEL_PAYMENT_DESCRIPTION,
   CANCEL_PAYMENT_NAME,
   REFUND_PAYMENT_DESCRIPTION,
   REFUND_PAYMENT_NAME,
-} from "./constants";
-import { Tool } from "../types";
+} from './constants.js';
+import { Tool } from '../../types.js';
 
 const refundPaymentRequestShape: z.ZodRawShape = {
   pspReference: z.string(),
@@ -20,7 +20,7 @@ const refundPaymentObject = z.object(refundPaymentRequestShape);
 
 const refundPayment = async (
   client: Client,
-  refundPaymentRequest: z.infer<typeof refundPaymentObject>
+  refundPaymentRequest: z.infer<typeof refundPaymentObject>,
 ) => {
   const { pspReference, currency, value, merchantAccount, reference } =
     refundPaymentRequest;
@@ -39,10 +39,10 @@ const refundPayment = async (
   try {
     return await checkoutAPI.ModificationsApi.refundCapturedPayment(
       pspReference,
-      paymentRefundRequest
+      paymentRefundRequest,
     );
   } catch (e) {
-    return "Failed to refund payment. Error: " + JSON.stringify(e);
+    return 'Failed to refund payment. Error: ' + JSON.stringify(e);
   }
 };
 
@@ -55,7 +55,7 @@ const cancelPaymentObject = z.object(cancelPaymentRequestShape);
 
 const cancelPayment = async (
   client: Client,
-  cancelPaymentRequest: z.infer<typeof cancelPaymentObject>
+  cancelPaymentRequest: z.infer<typeof cancelPaymentObject>,
 ) => {
   const { paymentReference, merchantAccount } = cancelPaymentRequest;
   const paymentRefundRequest: Types.checkout.StandalonePaymentCancelRequest = {
@@ -66,10 +66,10 @@ const cancelPayment = async (
   const checkoutAPI = new CheckoutAPI(client);
   try {
     return await checkoutAPI.ModificationsApi.cancelAuthorisedPayment(
-      paymentRefundRequest
+      paymentRefundRequest,
     );
   } catch (e) {
-    return "Failed to cancel payment. Error: " + JSON.stringify(e);
+    return 'Failed to cancel payment. Error: ' + JSON.stringify(e);
   }
 };
 
