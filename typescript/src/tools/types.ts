@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { Client } from "@adyen/api-library";
+import { z } from 'zod';
+import { Client } from '@adyen/api-library';
 
 export interface Tool {
   /**
