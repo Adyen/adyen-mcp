@@ -1,4 +1,5 @@
-export const CREATE_HOSTED_ONBOARDING_LINK_NAME = "create_hosted_onboarding_link";
+export const CREATE_HOSTED_ONBOARDING_LINK_NAME =
+  'create_hosted_onboarding_link';
 export const CREATE_HOSTED_ONBOARDING_LINK_DESCRIPTION = `Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
 
     Args:

@@ -1,4 +1,4 @@
-export const GET_ACCOUNT_HOLDER_NAME = "get_account_holder";
+export const GET_ACCOUNT_HOLDER_NAME = 'get_account_holder';
 export const GET_ACCOUNT_HOLDER_DESCRIPTION = `Returns an account holder's details and capabilities. 
 
     Args:

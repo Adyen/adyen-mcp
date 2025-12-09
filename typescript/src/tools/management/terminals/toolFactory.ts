@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { Client, ManagementAPI } from "@adyen/api-library";
-import { Tool } from "../types"; // Adjust path to your Tool type definition
+import { z } from 'zod';
+import { Client, ManagementAPI } from '@adyen/api-library';
+import { Tool } from '../../types.js';
 
 // The generic factory function to create any tool using ManagementAPI
 export function createTool<T extends z.ZodRawShape>(config: {
@@ -14,7 +14,10 @@ export function createTool<T extends z.ZodRawShape>(config: {
 }): Tool {
   const argumentSchema = z.object(config.schema);
 
-  const invoke = async (client: Client, args: z.infer<typeof argumentSchema>) => {
+  const invoke = async (
+    client: Client,
+    args: z.infer<typeof argumentSchema>,
+  ) => {
     const managementAPI = new ManagementAPI(client);
     try {
       const result = await config.apiCall(managementAPI, args);

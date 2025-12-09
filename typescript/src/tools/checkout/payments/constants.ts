@@ -1,4 +1,4 @@
-export const CREATE_PAYMENT_SESSION_NAME = "create_payment_session";
+export const CREATE_PAYMENT_SESSION_NAME = 'create_payment_session';
 export const CREATE_PAYMENT_SESSION_DESCRIPTION = `Creates a payment session for Adyen Drop-in, Components, or Hosted Checkout integrations.
 
     This tool initiates a payment session and returns encrypted data used by the front end
@@ -38,18 +38,18 @@ export const CREATE_PAYMENT_SESSION_DESCRIPTION = `Creates a payment session for
         )
         # Returns the raw API response with encrypted session data. Check webhooks for authorisation status.`;
 
-export const GET_PAYMENT_SESSION_NAME = "get_payment_session";
+export const GET_PAYMENT_SESSION_NAME = 'get_payment_session';
 export const GET_PAYMENT_SESSION_DESCRIPTION = `
     Returns the status of the payment session given a sessionId
     
     Args:
         sessionId (str): A unique identifier of the session.
-`
+`;
 
-export const GET_PAYMENT_METHODS_NAME = "get_payment_methods";
+export const GET_PAYMENT_METHODS_NAME = 'get_payment_methods';
 export const GET_PAYMENT_METHODS_DESCRIPTION = `
     Retrieves the list of available payment methods for the transaction based on the Merchant Account.
     
     Args:
         merchantAccount (str): A unique identifier of the session.
-`
+`;
