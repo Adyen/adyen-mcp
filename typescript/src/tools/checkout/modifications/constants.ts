@@ -1,4 +1,4 @@
-export const REFUND_PAYMENT_NAME = "refund_payment";
+export const REFUND_PAYMENT_NAME = 'refund_payment';
 export const REFUND_PAYMENT_DESCRIPTION = `Refunds a previously captured payment using the Adyen API.
 
     Args:
@@ -19,7 +19,7 @@ export const REFUND_PAYMENT_DESCRIPTION = `Refunds a previously captured payment
         refund_payment("PSP_REFERENCE_XYZ", "EUR", 2500, "your_merchant_account")
         # Returns a unique reference for the refund request. Check webhooks for the final status.`;
 
-export const CANCEL_PAYMENT_NAME = "cancel_payment";
+export const CANCEL_PAYMENT_NAME = 'cancel_payment';
 export const CANCEL_PAYMENT_DESCRIPTION = `Cancels an authorisation on a payment that has not yet been captured using the Adyen API.
 
     Args:

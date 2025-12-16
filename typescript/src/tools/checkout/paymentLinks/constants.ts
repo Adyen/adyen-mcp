@@ -1,4 +1,4 @@
-export const CREATE_PAYMENT_LINKS_NAME = "create_payment_links";
+export const CREATE_PAYMENT_LINKS_NAME = 'create_payment_links';
 export const CREATE_PAYMENT_LINKS_DESCRIPTION = `Creates a payment link at Adyen given an amount.
 
     Args:
@@ -22,7 +22,7 @@ export const CREATE_PAYMENT_LINKS_DESCRIPTION = `Creates a payment link at Adyen
         create_payment_link({currency: "EUR", value: 1099, merchantAccount: "your_merchant_account", countryCode:"NL", reference: "myReference123"})
         # Returns the raw response from the Adyen API, containing the payment link URL. And the linkId as \`id\`.`;
 
-export const GET_PAYMENT_LINK_NAME = "get_payment_link";
+export const GET_PAYMENT_LINK_NAME = 'get_payment_link';
 export const GET_PAYMENT_LINK_DESCRIPTION = `Get a payment link at Adyen given a linkId.
 
     Args:
@@ -35,7 +35,7 @@ export const GET_PAYMENT_LINK_DESCRIPTION = `Get a payment link at Adyen given a
         get_payment_link({linkId: "PLE83C39B0A0DE0C1E"})
         # Returns the raw response from the Adyen API, containing the payment link URL.`;
 
-export const UPDATE_PAYMENT_LINK_NAME = "update_payment_link";
+export const UPDATE_PAYMENT_LINK_NAME = 'update_payment_link';
 export const UPDATE_PAYMENT_LINK_DESCRIPTION = `Updates the status of an Adyen Payment Link, primarily used to manually expire a link.
 
     Args:

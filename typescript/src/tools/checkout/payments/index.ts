@@ -1,13 +1,14 @@
-import { z } from "zod";
-import { CheckoutAPI, Client, Types } from "@adyen/api-library";
+import { z } from 'zod';
+import { CheckoutAPI, Client, Types } from '@adyen/api-library';
 import {
   CREATE_PAYMENT_SESSION_DESCRIPTION,
   CREATE_PAYMENT_SESSION_NAME,
   GET_PAYMENT_METHODS_DESCRIPTION,
   GET_PAYMENT_METHODS_NAME,
-  GET_PAYMENT_SESSION_DESCRIPTION, GET_PAYMENT_SESSION_NAME,
-} from "./constants";
-import { Tool } from "../types";
+  GET_PAYMENT_SESSION_DESCRIPTION,
+  GET_PAYMENT_SESSION_NAME,
+} from './constants.js';
+import { Tool } from '../../types.js';
 
 const paymentSessionRequestShape: z.ZodRawShape = {
   currency: z.string(),
@@ -21,7 +22,7 @@ const paymentSessionObject = z.object(paymentSessionRequestShape);
 
 const createPaymentSession = async (
   client: Client,
-  paymentSessionRequest: z.infer<typeof paymentSessionObject>
+  paymentSessionRequest: z.infer<typeof paymentSessionObject>,
 ) => {
   const { currency, value, merchantAccount, reference, returnUrl } =
     paymentSessionRequest;
@@ -42,7 +43,7 @@ const createPaymentSession = async (
   try {
     return await checkoutAPI.PaymentsApi.sessions(createCheckoutSessionRequest);
   } catch (e) {
-    return "Failed to create checkout session. Error: " + JSON.stringify(e);
+    return 'Failed to create checkout session. Error: ' + JSON.stringify(e);
   }
 };
 
@@ -53,17 +54,19 @@ const getPaymentSessionRequestShape: z.ZodRawShape = {
 const getPaymentSessionObject = z.object(getPaymentSessionRequestShape);
 
 const getPaymentSession = async (
-    client: Client,
-    getPaymentSessionRequest: z.infer<typeof paymentSessionObject>
+  client: Client,
+  getPaymentSessionRequest: z.infer<typeof paymentSessionObject>,
 ) => {
-  const { sessionId } =
-      getPaymentSessionRequest;
+  const { sessionId } = getPaymentSessionRequest;
 
   const checkoutAPI = new CheckoutAPI(client);
   try {
     return await checkoutAPI.PaymentsApi.getResultOfPaymentSession(sessionId);
   } catch (e) {
-    return "Failed to get the result of the payment session. Error: " + JSON.stringify(e);
+    return (
+      'Failed to get the result of the payment session. Error: ' +
+      JSON.stringify(e)
+    );
   }
 };
 
@@ -74,21 +77,23 @@ const getPaymentMethodsRequestShape: z.ZodRawShape = {
 const getPaymentMethodsObject = z.object(getPaymentMethodsRequestShape);
 
 const getPaymentMethods = async (
-    client: Client,
-    getPaymentMethodsRequest: z.infer<typeof getPaymentMethodsObject>
+  client: Client,
+  getPaymentMethodsRequest: z.infer<typeof getPaymentMethodsObject>,
 ) => {
-  const { merchantAccount } =
-      getPaymentMethodsRequest;
+  const { merchantAccount } = getPaymentMethodsRequest;
 
-  const getCheckoutPaymentMethodsRequest: Types.checkout.PaymentMethodsRequest = {
-    merchantAccount
-  }
+  const getCheckoutPaymentMethodsRequest: Types.checkout.PaymentMethodsRequest =
+    {
+      merchantAccount,
+    };
 
   const checkoutAPI = new CheckoutAPI(client);
   try {
-    return await checkoutAPI.PaymentsApi.paymentMethods(getCheckoutPaymentMethodsRequest);
+    return await checkoutAPI.PaymentsApi.paymentMethods(
+      getCheckoutPaymentMethodsRequest,
+    );
   } catch (e) {
-    return "Failed to get payment methods. Error: " + JSON.stringify(e);
+    return 'Failed to get payment methods. Error: ' + JSON.stringify(e);
   }
 };
 

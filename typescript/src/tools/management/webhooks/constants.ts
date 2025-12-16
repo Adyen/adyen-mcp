@@ -1,4 +1,4 @@
-export const LIST_ALL_MERCHANT_WEBHOOKS = "list_all_merchant_webhooks";
+export const LIST_ALL_MERCHANT_WEBHOOKS = 'list_all_merchant_webhooks';
 export const LIST_ALL_MERCHANT_WEBHOOKS_DESCRIPTION = `
     Lists all webhook configurations for the merchant account.
 
@@ -8,7 +8,7 @@ export const LIST_ALL_MERCHANT_WEBHOOKS_DESCRIPTION = `
         pageNumber (int): The number of the page to fetch. Default is 1.
    `;
 
-export const GET_MERCHANT_WEBHOOK = "get_merchant_webhook";
+export const GET_MERCHANT_WEBHOOK = 'get_merchant_webhook';
 export const GET_MERCHANT_WEBHOOK_DESCRIPTION = `
     Returns the configuration for the webhook identified in the path.
 
@@ -17,7 +17,7 @@ export const GET_MERCHANT_WEBHOOK_DESCRIPTION = `
         webhookId (string): Unique identifier of the webhook configuration.
    `;
 
-export const LIST_ALL_COMPANY_WEBHOOKS = "list_all_company_webhooks";
+export const LIST_ALL_COMPANY_WEBHOOKS = 'list_all_company_webhooks';
 export const LIST_ALL_COMPANY_WEBHOOKS_DESCRIPTION = `
     Lists all webhook configurations for the company account.
 
@@ -27,7 +27,7 @@ export const LIST_ALL_COMPANY_WEBHOOKS_DESCRIPTION = `
         pageNumber (int): The number of the page to fetch. Default is 1.
    `;
 
-export const GET_COMPANY_WEBHOOK = "get_company_webhook";
+export const GET_COMPANY_WEBHOOK = 'get_company_webhook';
 export const GET_COMPANY_WEBHOOK_DESCRIPTION = `
     Returns the configuration for the webhook identified in the path.
 
