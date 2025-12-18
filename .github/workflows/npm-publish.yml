@@ -26,6 +26,6 @@ jobs:
       - run: |
           set -e
           cd typescript
-          npm install
+          npm ci
           npm run build
           npm publish --access public
