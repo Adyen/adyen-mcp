@@ -22,7 +22,7 @@ jobs:
         node-version: '18'
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
       working-directory: ./typescript
 
     - name: Run tests
