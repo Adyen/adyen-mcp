@@ -26,7 +26,19 @@ import {
   getMerchantWebhookTool,
   listAllCompanyWebhooksTool,
   listAllMerchantWebhooksTool,
+  testCompanyWebhookTool,
+  testMerchantWebhookTool,
 } from './management/webhooks/index.js';
+import {
+  getPaymentMethodsDetailsMerchant,
+  listAllPaymentMethodsMerchant,
+} from './management/paymentMethods/index.js';
+import {
+  getCompanyUserDetailsTool,
+  getMerchantUserDetailsTool,
+  listCompanyUsersTool,
+  listMerchantUsersTool,
+} from './management/users/index.js';
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -45,6 +57,14 @@ export const tools: Tool[] = [
   getAccountHolderTool,
   listAllCompanyWebhooksTool,
   getCompanyWebhookTool,
+  testCompanyWebhookTool,
   listAllMerchantWebhooksTool,
   getMerchantWebhookTool,
+  testMerchantWebhookTool,
+  listCompanyUsersTool,
+  getCompanyUserDetailsTool,
+  listMerchantUsersTool,
+  getMerchantUserDetailsTool,
+  listAllPaymentMethodsMerchant,
+  getPaymentMethodsDetailsMerchant,
 ];

@@ -28,11 +28,18 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 6. Management API - Webhooks
    - List all webhooks
    - Get a webhook
-7. Configuration API - Account Holders
+   - Test a webhook
+7. Management API - Payment methods
+   - Get all payment methods
+   - Get payment method details
+8. Management API - Users
+    - Get a list of users
+    - Get user details
+9. Configuration API - Account Holders
    - Get account holder details and its capability settings.
-8. Legal entity management API - Legal entities and onboarding links
-   - Get legal entity details and its KYC information. 
-   - Create an onboarding link for a legal entity. 
+10. Legal entity management API - Legal entities and onboarding links
+    - Get legal entity details and its KYC information. 
+    - Create an onboarding link for a legal entity. 
 
 ### Usage
 To run to the MCP server via `npx` you can execute:
@@ -60,6 +67,9 @@ npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_
 * Management API — Terminal settings read
 * Management API — Terminal settings read and write
 * Management API — Webhooks read
+* Management API — Webhooks read and write
+* Management API — Payment methods read
+* Trigger webhook notifications
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
