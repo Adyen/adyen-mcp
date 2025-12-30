@@ -27,6 +27,14 @@ import {
   listAllCompanyWebhooksTool,
   listAllMerchantWebhooksTool,
 } from './management/webhooks/index.js';
+import {
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+} from './management/apiCredentials/index.js';
+import {
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
+} from './management/allowedOrigins/index.js';
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -47,4 +55,8 @@ export const tools: Tool[] = [
   getCompanyWebhookTool,
   listAllMerchantWebhooksTool,
   getMerchantWebhookTool,
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
 ];

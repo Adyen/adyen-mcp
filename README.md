@@ -30,7 +30,12 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - List all webhooks - GET [`/merchants/{merchantId}/webhooks`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks)
    - Get a webhook - GET [`/companies/{companyId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/webhooks/(webhookId))
    - Get a webhook - GET [`/merchants/{merchantId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks/(webhookId))
-
+7. Management API - API Credentials
+   - List all API Credentials - GET [`/companies/{companyId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials)
+   - List all API Credentials - GET [`/merchants/{merchantId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials)
+8. Management API - Allowed Origins
+    - List all allowed origins - GET [`/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials/(apiCredentialId)/allowedOrigins)
+    - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
 
 ### Usage
 * Run the MCP server via `npx` with the following command:
@@ -75,6 +80,7 @@ Example usage in `.vscode`:
 * Management API — Terminal settings read
 * Management API — Terminal settings read and write
 * Management API — Webhooks read
+* Management API — API credentials read
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 
