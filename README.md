@@ -30,7 +30,16 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - List all webhooks - GET [`/merchants/{merchantId}/webhooks`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks)
    - Get a webhook - GET [`/companies/{companyId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/webhooks/(webhookId))
    - Get a webhook - GET [`/merchants/{merchantId}/webhooks/{webhookId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/webhooks/(webhookId))
-
+   - Test a webhook - POST [`/companies/{companyId}/webhooks/{webhookId}/test`](https://docs.adyen.com/api-explorer/Management/3/post/companies/(companyId)/webhooks/(webhookId)/test)
+   - Test a webhook - POST [`/merchants/{merchantId}/webhooks/{webhookId}/test`](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/webhooks/(webhookId)/test)
+7. Management API - Payment methods
+   - Get all payment methods - GET [`/merchants/{merchantId}/paymentMethodSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/paymentMethodSettings)
+   - Get payment method details - GET [`/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/paymentMethodSettings/(paymentMethodId))
+8. Management API - Users
+    - Get a list of users - GET [`/companies/{companyId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users)
+    - Get a list of users - GET [`/merchants/{merchantId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users)
+    - Get user details - GET [`companies/{companyId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users/(userId))
+    - Get user details - GET [`merchants/{merchantId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users/(userId))
 
 ### Usage
 * Run the MCP server via `npx` with the following command:
@@ -75,6 +84,9 @@ Example usage in `.vscode`:
 * Management API — Terminal settings read
 * Management API — Terminal settings read and write
 * Management API — Webhooks read
+* Management API — Webhooks read and write
+* Management API — Payment methods read
+* Trigger webhook notifications
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
 Only use the new user’s API key for the MCP application and limit the roles to match the tools you'll be using. 

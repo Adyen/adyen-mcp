@@ -10,6 +10,10 @@ import {
   LIST_ALL_COMPANY_WEBHOOKS_DESCRIPTION,
   LIST_ALL_MERCHANT_WEBHOOKS,
   LIST_ALL_MERCHANT_WEBHOOKS_DESCRIPTION,
+  TEST_COMPANY_WEBHOOK,
+  TEST_COMPANY_WEBHOOK_DESCRIPTION,
+  TEST_MERCHANT_WEBHOOK,
+  TEST_MERCHANT_WEBHOOK_DESCRIPTION,
 } from './constants.js';
 
 const listAllMerchantWebhooksRequestObject = z.object({
@@ -143,4 +147,73 @@ export const getCompanyWebhookTool: Tool = {
   description: GET_COMPANY_WEBHOOK_DESCRIPTION,
   arguments: getCompanyWebhookRequestObject,
   invoke: getCompanyWebhook,
+};
+
+const testMerchantWebhookRequestObject = z.object({
+  merchantId: z.string(),
+  webhookId: z.string(),
+  types: z.array(z.string()),
+});
+
+const testMerchantWebhook = async (
+  client: Client,
+  req: z.infer<typeof testMerchantWebhookRequestObject>,
+) => {
+  const { merchantId, webhookId, types } = req;
+
+  const managementAPI = new ManagementAPI(client);
+  try {
+    return await managementAPI.WebhooksMerchantLevelApi.testWebhook(
+      merchantId,
+      webhookId,
+      { types: types },
+    );
+  } catch (e) {
+    return (
+      'Failed to test merchant webhook configuration. Error: ' +
+      JSON.stringify(e)
+    );
+  }
+};
+
+export const testMerchantWebhookTool: Tool = {
+  name: TEST_MERCHANT_WEBHOOK,
+  description: TEST_MERCHANT_WEBHOOK_DESCRIPTION,
+  arguments: testMerchantWebhookRequestObject,
+  invoke: testMerchantWebhook,
+};
+
+const testCompanyWebhookRequestObject = z.object({
+  companyId: z.string(),
+  webhookId: z.string(),
+  types: z.array(z.string()).optional(),
+  merchantIds: z.array(z.string()).optional(),
+});
+
+const testCompanyWebhook = async (
+  client: Client,
+  req: z.infer<typeof testCompanyWebhookRequestObject>,
+) => {
+  const { companyId, webhookId, types, merchantIds } = req;
+
+  const managementAPI = new ManagementAPI(client);
+  try {
+    return await managementAPI.WebhooksCompanyLevelApi.testWebhook(
+      companyId,
+      webhookId,
+      { types: types, merchantIds: merchantIds },
+    );
+  } catch (e) {
+    return (
+      'Failed to test company webhook configuration. Error: ' +
+      JSON.stringify(e)
+    );
+  }
+};
+
+export const testCompanyWebhookTool: Tool = {
+  name: TEST_COMPANY_WEBHOOK,
+  description: TEST_COMPANY_WEBHOOK_DESCRIPTION,
+  arguments: testCompanyWebhookRequestObject,
+  invoke: testCompanyWebhook,
 };
