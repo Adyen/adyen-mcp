@@ -1,7 +1,7 @@
 The Adyen MCP server uses tools to define specific actions the LLM client can take, such as creating a payment link or refunding a payment. Tools are a way to connect the language in your users' prompts to specific functions. A tool is comprised of its name, description, input arguments, and an invoke function to execute. You can extend the functionality of your Adyen MCP implementation by creating new tools. 
 
 ## How it works
-To extend your Adyen MCP server:
+To extend the Adyen MCP server:
 
 1.  **[Define the tool's interface](#create-the-tool-file-structure)**. Define constant values that the LLM will use to understand the tool. This includes its `name`, `description`, and the `arguments` the tool's function accepts.
 2.  **[Implement the tool's logic](#implement-the-invoke-function)**. Write the tool's functionality and logic inside a function, which is invoked when the you [use the MCP](https://docs.adyen.com/development-resources/mcp-server#use).
@@ -152,4 +152,6 @@ To see the new tool in action, compile the TypeScript code and run the server.
     npm run start
     ```
 
-The server starts with the new `get_account_holder` tool available.
+The server starts with the new `get_account_holder` tool available. 
+
+To learn more about Adyen MCP, refer to this repository's README.md and [Adyen MCP Server](https://docs.adyen.com/development-resources/mcp-server). 
