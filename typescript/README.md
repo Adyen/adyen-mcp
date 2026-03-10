@@ -47,6 +47,11 @@ Optionally, if the environment is LIVE then you must also provide your Merchant 
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
+We advise to only run a subset of tools required for your particular use case:
+```
+npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
+```
+
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
 * Management API - Accounts Read
 * Management API - Payment methods Read

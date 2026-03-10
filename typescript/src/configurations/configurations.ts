@@ -5,6 +5,7 @@ export enum AdyenOptionKeys {
   ApiKey = 'adyenApiKey',
   Environment = 'env',
   LivePrefix = 'livePrefix',
+  Tools = 'tools',
 }
 
 export enum Environment {
@@ -14,21 +15,39 @@ export enum Environment {
 
 const mandatoryFields = [AdyenOptionKeys.ApiKey, AdyenOptionKeys.Environment];
 
-type AdyenConfig = {
-  [key in AdyenOptionKeys]: string;
+export type AdyenConfig = {
+  [AdyenOptionKeys.ApiKey]: string;
+  [AdyenOptionKeys.Environment]: string;
+  [AdyenOptionKeys.LivePrefix]?: string;
+  [AdyenOptionKeys.Tools]?: string[];
 };
 
 const optionsConfig: ParseArgsConfig['options'] = {
   [AdyenOptionKeys.ApiKey]: {
     type: 'string' as const,
+    short: 'a',
   },
   [AdyenOptionKeys.Environment]: {
     type: 'string' as const,
     default: Environment.TEST,
+    short: 'e',
   },
   [AdyenOptionKeys.LivePrefix]: {
     type: 'string' as const,
+    short: 'l',
   },
+  [AdyenOptionKeys.Tools]: {
+    type: 'string' as const,
+    short: 't',
+  },
+};
+
+const splitAndTrim = (input: string | undefined): string[] | undefined => {
+  if (!input) return undefined;
+  return input
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
 };
 
 function validateAdyenConfig(options: { [option: string]: any }) {
@@ -62,6 +81,7 @@ function validateAdyenConfig(options: { [option: string]: any }) {
             Example: --${AdyenOptionKeys.LivePrefix} <your-url>`,
     );
   }
+  options[AdyenOptionKeys.Tools] = splitAndTrim(options[AdyenOptionKeys.Tools]);
 
   return options as AdyenConfig;
 }

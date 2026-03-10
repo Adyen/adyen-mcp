@@ -45,6 +45,10 @@ If you are using the LIVE environment then you must also provide your [live URL 
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
+We advise to only run a subset of tools required for your particular use case:
+```
+npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
+```
 
 Example usage in `.vscode`:
 ```json
