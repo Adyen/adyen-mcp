@@ -4,7 +4,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { Client } from '@adyen/api-library';
 import { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
-import { tools } from './tools/tools.js';
+import { getActiveTools } from './tools/tools.js';
 import {
   Environment,
   getAdyenConfig,
@@ -35,7 +35,7 @@ async function main() {
     version: APP_VERSION,
   });
 
-  for (const tool of tools) {
+  for (const tool of getActiveTools(adyenConfig)) {
     server.registerTool(
       tool.name,
       {

@@ -3,7 +3,6 @@ import {
   getPaymentLinkTool,
   updatePaymentLinkTool,
 } from './checkout/paymentLinks/index.js';
-import { Tool } from './types.js';
 import {
   cancelPaymentTool,
   refundPaymentTool,
@@ -35,6 +34,8 @@ import {
   listAllCompanyAllowedOriginsTool,
   listAllMerchantAllowedOriginsTool,
 } from './management/allowedOrigins/index.js';
+import { AdyenConfig } from '../configurations/configurations';
+import { Tool } from './types';
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -60,3 +61,33 @@ export const tools: Tool[] = [
   listAllCompanyAllowedOriginsTool,
   listAllMerchantAllowedOriginsTool,
 ];
+
+const availableToolNames = tools.map((i) => `'${i.name}'`).join(', ');
+
+export function getActiveTools(adyenConfig: AdyenConfig): Set<Tool> {
+  const configuredTools = adyenConfig.tools;
+  if (!configuredTools || configuredTools.length < 1) {
+    return new Set<Tool>(tools);
+  }
+
+  const activeTools = new Set<Tool>();
+  configuredTools.forEach((toolName) => {
+    const tool = tools.find((t) => t.name === toolName);
+    if (tool) {
+      activeTools.add(tool);
+    } else {
+      console.error(
+        `❌ Error: Tool '${toolName}' not found.\n` +
+          `   👉 All available tools: ${availableToolNames}`,
+      );
+    }
+  });
+
+  if (activeTools.size < 1) {
+    throw new Error(
+      '⛔ No valid tools were selected based on your configuration.\n' +
+        '   Please check your --tools arguments.',
+    );
+  }
+  return activeTools;
+}
