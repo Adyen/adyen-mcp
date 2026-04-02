@@ -41,10 +41,10 @@ const createPaymentLink = async (
   const checkoutAPI = new CheckoutAPI(client);
   try {
     return await checkoutAPI.PaymentLinksApi.paymentLinks(paymentLinkRequest);
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to create payment link. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -71,10 +71,10 @@ const getPaymentLink = async (
   const checkoutAPI = new CheckoutAPI(client);
   try {
     return await checkoutAPI.PaymentLinksApi.getPaymentLink(linkId);
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to get payment link. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -90,10 +90,10 @@ const updatePaymentLink = async (
     return await checkoutAPI.PaymentLinksApi.updatePaymentLink(linkId, {
       status,
     });
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to update payment link. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };

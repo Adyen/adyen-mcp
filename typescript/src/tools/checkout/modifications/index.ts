@@ -41,10 +41,10 @@ const refundPayment = async (
       pspReference,
       paymentRefundRequest,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to refund payment. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -71,10 +71,10 @@ const cancelPayment = async (
     return await checkoutAPI.ModificationsApi.cancelAuthorisedPayment(
       paymentRefundRequest,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to cancel payment. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };

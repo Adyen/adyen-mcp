@@ -26,8 +26,8 @@ export function createTool<T extends z.ZodRawShape>(config: {
         return config.successMessage(result, args);
       }
       return result;
-    } catch (e: any) {
-      const errorMessage = e.message || 'Unknown error';
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : 'Unknown error';
       return `Failed to execute tool '${config.name}'. Error: ${errorMessage}`;
     }
   };

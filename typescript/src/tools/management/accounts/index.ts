@@ -31,10 +31,10 @@ const listMerchantAccounts = async (
       pageNumber,
       pageSize,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to list merchant accounts. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -65,10 +65,10 @@ const getMerchantAccount = async (
     return await managementAPI.AccountMerchantLevelApi.getMerchantAccount(
       merchantId,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to get merchant account. Error: ' +
-      ((e as any).message || 'Unknown error')
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
