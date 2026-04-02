@@ -40,13 +40,13 @@ describe('error sanitization', () => {
       mockSessions = vi.fn();
       mockGetSession = vi.fn();
       mockPaymentMethods = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(() => ({
+      vi.mocked(CheckoutAPI).mockReturnValue({
         PaymentsApi: {
           sessions: mockSessions,
           getResultOfPaymentSession: mockGetSession,
           paymentMethods: mockPaymentMethods,
         },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/checkout/payments/index.js');
     });
 
@@ -92,13 +92,13 @@ describe('error sanitization', () => {
       mockCreate = vi.fn();
       mockGet = vi.fn();
       mockUpdate = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(() => ({
+      vi.mocked(CheckoutAPI).mockReturnValue({
         PaymentLinksApi: {
           paymentLinks: mockCreate,
           getPaymentLink: mockGet,
           updatePaymentLink: mockUpdate,
         },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/checkout/paymentLinks/index.js');
     });
 
@@ -131,12 +131,12 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockRefund = vi.fn();
       mockCancel = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(() => ({
+      vi.mocked(CheckoutAPI).mockReturnValue({
         ModificationsApi: {
           refundCapturedPayment: mockRefund,
           cancelAuthorisedPayment: mockCancel,
         },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/checkout/modifications/index.js');
     });
 
@@ -165,12 +165,12 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockList = vi.fn();
       mockGet = vi.fn();
-      vi.mocked(ManagementAPI).mockImplementation(() => ({
+      vi.mocked(ManagementAPI).mockReturnValue({
         AccountMerchantLevelApi: {
           listMerchantAccounts: mockList,
           getMerchantAccount: mockGet,
         },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/management/accounts/index.js');
     });
 
@@ -200,7 +200,7 @@ describe('error sanitization', () => {
       mockMerchantGet = vi.fn();
       mockCompanyList = vi.fn();
       mockCompanyGet = vi.fn();
-      vi.mocked(ManagementAPI).mockImplementation(() => ({
+      vi.mocked(ManagementAPI).mockReturnValue({
         WebhooksMerchantLevelApi: {
           listAllWebhooks: mockMerchantList,
           getWebhook: mockMerchantGet,
@@ -209,7 +209,7 @@ describe('error sanitization', () => {
           listAllWebhooks: mockCompanyList,
           getWebhook: mockCompanyGet,
         },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/management/webhooks/index.js');
     });
 
@@ -244,9 +244,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockImplementation(() => ({
+      vi.mocked(LegalEntityManagementAPI).mockReturnValue({
         LegalEntitiesApi: { getLegalEntity: mockGet },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/legalEntityManagement/legalEntities/index.js');
     });
 
@@ -263,9 +263,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockCreate = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockImplementation(() => ({
+      vi.mocked(LegalEntityManagementAPI).mockReturnValue({
         HostedOnboardingApi: { getLinkToAdyenhostedOnboardingPage: mockCreate },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/legalEntityManagement/onboardingLinks/index.js');
     });
 
@@ -282,9 +282,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(BalancePlatformAPI).mockImplementation(() => ({
+      vi.mocked(BalancePlatformAPI).mockReturnValue({
         AccountHoldersApi: { getAccountHolder: mockGet },
-      }) as any);
+      } as any);
       tools = await import('../src/tools/configuration/accountHolders/index.js');
     });
 
