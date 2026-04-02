@@ -133,7 +133,8 @@ const getCompanyWebhook = async (
     );
   } catch (e) {
     return (
-      'Failed to get company webhook configuration. Error: ' + ((e as any).message || 'Unknown error')
+      'Failed to get company webhook configuration. Error: ' +
+      ((e as any).message || 'Unknown error')
     );
   }
 };

@@ -43,7 +43,10 @@ const createPaymentSession = async (
   try {
     return await checkoutAPI.PaymentsApi.sessions(createCheckoutSessionRequest);
   } catch (e) {
-    return 'Failed to create checkout session. Error: ' + ((e as any).message || 'Unknown error');
+    return (
+      'Failed to create checkout session. Error: ' +
+      ((e as any).message || 'Unknown error')
+    );
   }
 };
 
@@ -93,7 +96,10 @@ const getPaymentMethods = async (
       getCheckoutPaymentMethodsRequest,
     );
   } catch (e) {
-    return 'Failed to get payment methods. Error: ' + ((e as any).message || 'Unknown error');
+    return (
+      'Failed to get payment methods. Error: ' +
+      ((e as any).message || 'Unknown error')
+    );
   }
 };
 

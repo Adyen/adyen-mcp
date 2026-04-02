@@ -63,6 +63,9 @@ async function main() {
 try {
   main();
 } catch (e) {
-  console.error('An error occurred during main execution of Adyen MCP:', (e as any)?.message || e);
+  console.error(
+    'An error occurred during main execution of Adyen MCP:',
+    (e as any)?.message || e,
+  );
   process.exit(1);
 }

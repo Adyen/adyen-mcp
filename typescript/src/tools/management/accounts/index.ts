@@ -32,7 +32,10 @@ const listMerchantAccounts = async (
       pageSize,
     );
   } catch (e) {
-    return 'Failed to list merchant accounts. Error: ' + ((e as any).message || 'Unknown error');
+    return (
+      'Failed to list merchant accounts. Error: ' +
+      ((e as any).message || 'Unknown error')
+    );
   }
 };
 
@@ -63,7 +66,10 @@ const getMerchantAccount = async (
       merchantId,
     );
   } catch (e) {
-    return 'Failed to get merchant account. Error: ' + ((e as any).message || 'Unknown error');
+    return (
+      'Failed to get merchant account. Error: ' +
+      ((e as any).message || 'Unknown error')
+    );
   }
 };
 
