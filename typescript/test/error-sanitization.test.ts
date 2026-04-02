@@ -1,9 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Client, CheckoutAPI, ManagementAPI, BalancePlatformAPI, LegalEntityManagementAPI } from '@adyen/api-library';
+import {
+  Client,
+  CheckoutAPI,
+  ManagementAPI,
+  BalancePlatformAPI,
+  LegalEntityManagementAPI,
+} from '@adyen/api-library';
 
 vi.mock('@adyen/api-library');
 
-const SENSITIVE_FIELDS = ['JSESSIONID', 'www-authenticate', 'traceparent', 'responseHeaders', 'set-cookie'];
+const SENSITIVE_FIELDS = [
+  'JSESSIONID',
+  'www-authenticate',
+  'traceparent',
+  'responseHeaders',
+  'set-cookie',
+];
 
 function createAdyenHttpError(message: string): Error {
   const error = new Error(message);
@@ -16,7 +28,8 @@ function createAdyenHttpError(message: string): Error {
     'x-frame-options': 'SAMEORIGIN',
     'strict-transport-security': 'max-age=31536000; includeSubDomains',
   };
-  (error as any).responseBody = '{"status":401,"errorCode":"000","message":"Unauthorized"}';
+  (error as any).responseBody =
+    '{"status":401,"errorCode":"000","message":"Unauthorized"}';
   return error;
 }
 
@@ -40,7 +53,7 @@ describe('error sanitization', () => {
       mockSessions = vi.fn();
       mockGetSession = vi.fn();
       mockPaymentMethods = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(function() {
+      vi.mocked(CheckoutAPI).mockImplementation(function () {
         return {
           PaymentsApi: {
             sessions: mockSessions,
@@ -53,9 +66,15 @@ describe('error sanitization', () => {
     });
 
     it('createPaymentSession does not leak response headers on error', async () => {
-      mockSessions.mockRejectedValue(createAdyenHttpError('HTTP Exception: 401. Unauthorized'));
+      mockSessions.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 401. Unauthorized'),
+      );
       const result = await tools.createPaymentSessionTool.invoke(mockClient, {
-        currency: 'EUR', value: 100, merchantAccount: 'TEST', reference: 'ref', returnUrl: 'https://example.com',
+        currency: 'EUR',
+        value: 100,
+        merchantAccount: 'TEST',
+        reference: 'ref',
+        returnUrl: 'https://example.com',
       });
       assertNoSensitiveData(result);
       expect(result).toContain('HTTP Exception: 401. Unauthorized');
@@ -64,21 +83,33 @@ describe('error sanitization', () => {
     it('createPaymentSession returns "Unknown error" when e.message is absent', async () => {
       mockSessions.mockRejectedValue({});
       const result = await tools.createPaymentSessionTool.invoke(mockClient, {
-        currency: 'EUR', value: 100, merchantAccount: 'TEST', reference: 'ref', returnUrl: 'https://example.com',
+        currency: 'EUR',
+        value: 100,
+        merchantAccount: 'TEST',
+        reference: 'ref',
+        returnUrl: 'https://example.com',
       });
       expect(result).toContain('Unknown error');
     });
 
     it('getPaymentSession does not leak response headers on error', async () => {
-      mockGetSession.mockRejectedValue(createAdyenHttpError('HTTP Exception: 401. Unauthorized'));
-      const result = await tools.getPaymentSessionTool.invoke(mockClient, { sessionId: 'sid' });
+      mockGetSession.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 401. Unauthorized'),
+      );
+      const result = await tools.getPaymentSessionTool.invoke(mockClient, {
+        sessionId: 'sid',
+      });
       assertNoSensitiveData(result);
       expect(result).toContain('HTTP Exception: 401. Unauthorized');
     });
 
     it('getPaymentMethods does not leak response headers on error', async () => {
-      mockPaymentMethods.mockRejectedValue(createAdyenHttpError('HTTP Exception: 401. Unauthorized'));
-      const result = await tools.getPaymentMethodsTool.invoke(mockClient, { merchantAccount: 'TEST' });
+      mockPaymentMethods.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 401. Unauthorized'),
+      );
+      const result = await tools.getPaymentMethodsTool.invoke(mockClient, {
+        merchantAccount: 'TEST',
+      });
       assertNoSensitiveData(result);
       expect(result).toContain('HTTP Exception: 401. Unauthorized');
     });
@@ -94,7 +125,7 @@ describe('error sanitization', () => {
       mockCreate = vi.fn();
       mockGet = vi.fn();
       mockUpdate = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(function() {
+      vi.mocked(CheckoutAPI).mockImplementation(function () {
         return {
           PaymentLinksApi: {
             paymentLinks: mockCreate,
@@ -107,22 +138,37 @@ describe('error sanitization', () => {
     });
 
     it('createPaymentLink does not leak response headers on error', async () => {
-      mockCreate.mockRejectedValue(createAdyenHttpError('HTTP Exception: 401. Unauthorized'));
+      mockCreate.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 401. Unauthorized'),
+      );
       const result = await tools.createPaymentLinkTool.invoke(mockClient, {
-        currency: 'EUR', value: 100, merchantAccount: 'TEST', countryCode: 'NL', reference: 'ref',
+        currency: 'EUR',
+        value: 100,
+        merchantAccount: 'TEST',
+        countryCode: 'NL',
+        reference: 'ref',
       });
       assertNoSensitiveData(result);
     });
 
     it('getPaymentLink does not leak response headers on error', async () => {
-      mockGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getPaymentLinkTool.invoke(mockClient, { linkId: 'link123' });
+      mockGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getPaymentLinkTool.invoke(mockClient, {
+        linkId: 'link123',
+      });
       assertNoSensitiveData(result);
     });
 
     it('updatePaymentLink does not leak response headers on error', async () => {
-      mockUpdate.mockRejectedValue(createAdyenHttpError('HTTP Exception: 422. Unprocessable'));
-      const result = await tools.updatePaymentLinkTool.invoke(mockClient, { linkId: 'link123', status: 'expired' });
+      mockUpdate.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 422. Unprocessable'),
+      );
+      const result = await tools.updatePaymentLinkTool.invoke(mockClient, {
+        linkId: 'link123',
+        status: 'expired',
+      });
       assertNoSensitiveData(result);
     });
   });
@@ -135,7 +181,7 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockRefund = vi.fn();
       mockCancel = vi.fn();
-      vi.mocked(CheckoutAPI).mockImplementation(function() {
+      vi.mocked(CheckoutAPI).mockImplementation(function () {
         return {
           ModificationsApi: {
             refundCapturedPayment: mockRefund,
@@ -147,17 +193,26 @@ describe('error sanitization', () => {
     });
 
     it('refundPayment does not leak response headers on error', async () => {
-      mockRefund.mockRejectedValue(createAdyenHttpError('HTTP Exception: 422. Unprocessable'));
+      mockRefund.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 422. Unprocessable'),
+      );
       const result = await tools.refundPaymentTool.invoke(mockClient, {
-        pspReference: 'psp123', currency: 'EUR', value: 100, merchantAccount: 'TEST', reference: 'ref',
+        pspReference: 'psp123',
+        currency: 'EUR',
+        value: 100,
+        merchantAccount: 'TEST',
+        reference: 'ref',
       });
       assertNoSensitiveData(result);
     });
 
     it('cancelPayment does not leak response headers on error', async () => {
-      mockCancel.mockRejectedValue(createAdyenHttpError('HTTP Exception: 422. Unprocessable'));
+      mockCancel.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 422. Unprocessable'),
+      );
       const result = await tools.cancelPaymentTool.invoke(mockClient, {
-        paymentReference: 'pay123', merchantAccount: 'TEST',
+        paymentReference: 'pay123',
+        merchantAccount: 'TEST',
       });
       assertNoSensitiveData(result);
     });
@@ -171,7 +226,7 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockList = vi.fn();
       mockGet = vi.fn();
-      vi.mocked(ManagementAPI).mockImplementation(function() {
+      vi.mocked(ManagementAPI).mockImplementation(function () {
         return {
           AccountMerchantLevelApi: {
             listMerchantAccounts: mockList,
@@ -183,15 +238,24 @@ describe('error sanitization', () => {
     });
 
     it('listMerchantAccounts does not leak response headers on error', async () => {
-      mockList.mockRejectedValue(createAdyenHttpError('HTTP Exception: 403. Forbidden'));
-      const result = await tools.listMerchantAccountsTool.invoke(mockClient, { pageSize: 10, pageNumber: 1 });
+      mockList.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 403. Forbidden'),
+      );
+      const result = await tools.listMerchantAccountsTool.invoke(mockClient, {
+        pageSize: 10,
+        pageNumber: 1,
+      });
       assertNoSensitiveData(result);
       expect(result).toContain('HTTP Exception: 403. Forbidden');
     });
 
     it('getMerchantAccount does not leak response headers on error', async () => {
-      mockGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getMerchantAccountsTool.invoke(mockClient, { merchantId: 'merch123' });
+      mockGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getMerchantAccountsTool.invoke(mockClient, {
+        merchantId: 'merch123',
+      });
       assertNoSensitiveData(result);
     });
   });
@@ -208,7 +272,7 @@ describe('error sanitization', () => {
       mockMerchantGet = vi.fn();
       mockCompanyList = vi.fn();
       mockCompanyGet = vi.fn();
-      vi.mocked(ManagementAPI).mockImplementation(function() {
+      vi.mocked(ManagementAPI).mockImplementation(function () {
         return {
           WebhooksMerchantLevelApi: {
             listAllWebhooks: mockMerchantList,
@@ -224,26 +288,47 @@ describe('error sanitization', () => {
     });
 
     it('listAllMerchantWebhooks does not leak response headers on error', async () => {
-      mockMerchantList.mockRejectedValue(createAdyenHttpError('HTTP Exception: 403. Forbidden'));
-      const result = await tools.listAllMerchantWebhooksTool.invoke(mockClient, { merchantId: 'm1', pageSize: 10, pageNumber: 1 });
+      mockMerchantList.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 403. Forbidden'),
+      );
+      const result = await tools.listAllMerchantWebhooksTool.invoke(
+        mockClient,
+        { merchantId: 'm1', pageSize: 10, pageNumber: 1 },
+      );
       assertNoSensitiveData(result);
     });
 
     it('getMerchantWebhook does not leak response headers on error', async () => {
-      mockMerchantGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getMerchantWebhookTool.invoke(mockClient, { merchantId: 'm1', webhookId: 'w1' });
+      mockMerchantGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getMerchantWebhookTool.invoke(mockClient, {
+        merchantId: 'm1',
+        webhookId: 'w1',
+      });
       assertNoSensitiveData(result);
     });
 
     it('listAllCompanyWebhooks does not leak response headers on error', async () => {
-      mockCompanyList.mockRejectedValue(createAdyenHttpError('HTTP Exception: 403. Forbidden'));
-      const result = await tools.listAllCompanyWebhooksTool.invoke(mockClient, { companyId: 'c1', pageSize: 10, pageNumber: 1 });
+      mockCompanyList.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 403. Forbidden'),
+      );
+      const result = await tools.listAllCompanyWebhooksTool.invoke(mockClient, {
+        companyId: 'c1',
+        pageSize: 10,
+        pageNumber: 1,
+      });
       assertNoSensitiveData(result);
     });
 
     it('getCompanyWebhook does not leak response headers on error', async () => {
-      mockCompanyGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getCompanyWebhookTool.invoke(mockClient, { companyId: 'c1', webhookId: 'w1' });
+      mockCompanyGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getCompanyWebhookTool.invoke(mockClient, {
+        companyId: 'c1',
+        webhookId: 'w1',
+      });
       assertNoSensitiveData(result);
     });
   });
@@ -254,15 +339,20 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockImplementation(function() {
+      vi.mocked(LegalEntityManagementAPI).mockImplementation(function () {
         return { LegalEntitiesApi: { getLegalEntity: mockGet } } as any;
       });
-      tools = await import('../src/tools/legalEntityManagement/legalEntities/index.js');
+      tools =
+        await import('../src/tools/legalEntityManagement/legalEntities/index.js');
     });
 
     it('getLegalEntity does not leak response headers on error', async () => {
-      mockGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getLegalEntityTool.invoke(mockClient, { id: 'le123' });
+      mockGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getLegalEntityTool.invoke(mockClient, {
+        id: 'le123',
+      });
       assertNoSensitiveData(result);
     });
   });
@@ -273,15 +363,25 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockCreate = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockImplementation(function() {
-        return { HostedOnboardingApi: { getLinkToAdyenhostedOnboardingPage: mockCreate } } as any;
+      vi.mocked(LegalEntityManagementAPI).mockImplementation(function () {
+        return {
+          HostedOnboardingApi: {
+            getLinkToAdyenhostedOnboardingPage: mockCreate,
+          },
+        } as any;
       });
-      tools = await import('../src/tools/legalEntityManagement/onboardingLinks/index.js');
+      tools =
+        await import('../src/tools/legalEntityManagement/onboardingLinks/index.js');
     });
 
     it('getOnboardingLink does not leak response headers on error', async () => {
-      mockCreate.mockRejectedValue(createAdyenHttpError('HTTP Exception: 403. Forbidden'));
-      const result = await tools.createHostedOnboardingLinkTool.invoke(mockClient, { id: 'le123' });
+      mockCreate.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 403. Forbidden'),
+      );
+      const result = await tools.createHostedOnboardingLinkTool.invoke(
+        mockClient,
+        { id: 'le123' },
+      );
       assertNoSensitiveData(result);
     });
   });
@@ -292,15 +392,20 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(BalancePlatformAPI).mockImplementation(function() {
+      vi.mocked(BalancePlatformAPI).mockImplementation(function () {
         return { AccountHoldersApi: { getAccountHolder: mockGet } } as any;
       });
-      tools = await import('../src/tools/configuration/accountHolders/index.js');
+      tools =
+        await import('../src/tools/configuration/accountHolders/index.js');
     });
 
     it('getAccountHolder does not leak response headers on error', async () => {
-      mockGet.mockRejectedValue(createAdyenHttpError('HTTP Exception: 404. Not Found'));
-      const result = await tools.getAccountHolderTool.invoke(mockClient, { id: 'ah123' });
+      mockGet.mockRejectedValue(
+        createAdyenHttpError('HTTP Exception: 404. Not Found'),
+      );
+      const result = await tools.getAccountHolderTool.invoke(mockClient, {
+        id: 'ah123',
+      });
       assertNoSensitiveData(result);
     });
   });
