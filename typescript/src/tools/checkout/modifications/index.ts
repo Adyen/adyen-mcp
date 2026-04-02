@@ -42,7 +42,7 @@ const refundPayment = async (
       paymentRefundRequest,
     );
   } catch (e) {
-    return 'Failed to refund payment. Error: ' + JSON.stringify(e);
+    return 'Failed to refund payment. Error: ' + ((e as any).message || 'Unknown error');
   }
 };
 
@@ -69,7 +69,7 @@ const cancelPayment = async (
       paymentRefundRequest,
     );
   } catch (e) {
-    return 'Failed to cancel payment. Error: ' + JSON.stringify(e);
+    return 'Failed to cancel payment. Error: ' + ((e as any).message || 'Unknown error');
   }
 };
 

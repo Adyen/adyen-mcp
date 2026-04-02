@@ -34,7 +34,7 @@ const listAllMerchantWebhooks = async (
   } catch (e) {
     return (
       'Failed to list all webhook configurations on merchant account. Error: ' +
-      JSON.stringify(e)
+      ((e as any).message || 'Unknown error')
     );
   }
 };
@@ -68,7 +68,7 @@ const getMerchantWebhook = async (
   } catch (e) {
     return (
       'Failed to get merchant webhook configuration. Error: ' +
-      JSON.stringify(e)
+      ((e as any).message || 'Unknown error')
     );
   }
 };
@@ -102,7 +102,7 @@ const listAllCompanyWebhooks = async (
   } catch (e) {
     return (
       'Failed to list all webhook configurations on company account. Error: ' +
-      JSON.stringify(e)
+      ((e as any).message || 'Unknown error')
     );
   }
 };
@@ -133,7 +133,7 @@ const getCompanyWebhook = async (
     );
   } catch (e) {
     return (
-      'Failed to get company webhook configuration. Error: ' + JSON.stringify(e)
+      'Failed to get company webhook configuration. Error: ' + ((e as any).message || 'Unknown error')
     );
   }
 };

@@ -21,7 +21,7 @@ const getLegalEntity = async (
   try {
     return await legalEntityManagmentApi.LegalEntitiesApi.getLegalEntity(id);
   } catch (e) {
-    return 'Failed to get legal entity. Error: ' + JSON.stringify(e);
+    return 'Failed to get legal entity. Error: ' + ((e as any).message || 'Unknown error');
   }
 };
 
