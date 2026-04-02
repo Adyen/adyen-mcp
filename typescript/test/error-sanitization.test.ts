@@ -40,13 +40,15 @@ describe('error sanitization', () => {
       mockSessions = vi.fn();
       mockGetSession = vi.fn();
       mockPaymentMethods = vi.fn();
-      vi.mocked(CheckoutAPI).mockReturnValue({
-        PaymentsApi: {
-          sessions: mockSessions,
-          getResultOfPaymentSession: mockGetSession,
-          paymentMethods: mockPaymentMethods,
-        },
-      } as any);
+      vi.mocked(CheckoutAPI).mockImplementation(function() {
+        return {
+          PaymentsApi: {
+            sessions: mockSessions,
+            getResultOfPaymentSession: mockGetSession,
+            paymentMethods: mockPaymentMethods,
+          },
+        } as any;
+      });
       tools = await import('../src/tools/checkout/payments/index.js');
     });
 
@@ -92,13 +94,15 @@ describe('error sanitization', () => {
       mockCreate = vi.fn();
       mockGet = vi.fn();
       mockUpdate = vi.fn();
-      vi.mocked(CheckoutAPI).mockReturnValue({
-        PaymentLinksApi: {
-          paymentLinks: mockCreate,
-          getPaymentLink: mockGet,
-          updatePaymentLink: mockUpdate,
-        },
-      } as any);
+      vi.mocked(CheckoutAPI).mockImplementation(function() {
+        return {
+          PaymentLinksApi: {
+            paymentLinks: mockCreate,
+            getPaymentLink: mockGet,
+            updatePaymentLink: mockUpdate,
+          },
+        } as any;
+      });
       tools = await import('../src/tools/checkout/paymentLinks/index.js');
     });
 
@@ -131,12 +135,14 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockRefund = vi.fn();
       mockCancel = vi.fn();
-      vi.mocked(CheckoutAPI).mockReturnValue({
-        ModificationsApi: {
-          refundCapturedPayment: mockRefund,
-          cancelAuthorisedPayment: mockCancel,
-        },
-      } as any);
+      vi.mocked(CheckoutAPI).mockImplementation(function() {
+        return {
+          ModificationsApi: {
+            refundCapturedPayment: mockRefund,
+            cancelAuthorisedPayment: mockCancel,
+          },
+        } as any;
+      });
       tools = await import('../src/tools/checkout/modifications/index.js');
     });
 
@@ -165,12 +171,14 @@ describe('error sanitization', () => {
     beforeEach(async () => {
       mockList = vi.fn();
       mockGet = vi.fn();
-      vi.mocked(ManagementAPI).mockReturnValue({
-        AccountMerchantLevelApi: {
-          listMerchantAccounts: mockList,
-          getMerchantAccount: mockGet,
-        },
-      } as any);
+      vi.mocked(ManagementAPI).mockImplementation(function() {
+        return {
+          AccountMerchantLevelApi: {
+            listMerchantAccounts: mockList,
+            getMerchantAccount: mockGet,
+          },
+        } as any;
+      });
       tools = await import('../src/tools/management/accounts/index.js');
     });
 
@@ -200,16 +208,18 @@ describe('error sanitization', () => {
       mockMerchantGet = vi.fn();
       mockCompanyList = vi.fn();
       mockCompanyGet = vi.fn();
-      vi.mocked(ManagementAPI).mockReturnValue({
-        WebhooksMerchantLevelApi: {
-          listAllWebhooks: mockMerchantList,
-          getWebhook: mockMerchantGet,
-        },
-        WebhooksCompanyLevelApi: {
-          listAllWebhooks: mockCompanyList,
-          getWebhook: mockCompanyGet,
-        },
-      } as any);
+      vi.mocked(ManagementAPI).mockImplementation(function() {
+        return {
+          WebhooksMerchantLevelApi: {
+            listAllWebhooks: mockMerchantList,
+            getWebhook: mockMerchantGet,
+          },
+          WebhooksCompanyLevelApi: {
+            listAllWebhooks: mockCompanyList,
+            getWebhook: mockCompanyGet,
+          },
+        } as any;
+      });
       tools = await import('../src/tools/management/webhooks/index.js');
     });
 
@@ -244,9 +254,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockReturnValue({
-        LegalEntitiesApi: { getLegalEntity: mockGet },
-      } as any);
+      vi.mocked(LegalEntityManagementAPI).mockImplementation(function() {
+        return { LegalEntitiesApi: { getLegalEntity: mockGet } } as any;
+      });
       tools = await import('../src/tools/legalEntityManagement/legalEntities/index.js');
     });
 
@@ -263,9 +273,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockCreate = vi.fn();
-      vi.mocked(LegalEntityManagementAPI).mockReturnValue({
-        HostedOnboardingApi: { getLinkToAdyenhostedOnboardingPage: mockCreate },
-      } as any);
+      vi.mocked(LegalEntityManagementAPI).mockImplementation(function() {
+        return { HostedOnboardingApi: { getLinkToAdyenhostedOnboardingPage: mockCreate } } as any;
+      });
       tools = await import('../src/tools/legalEntityManagement/onboardingLinks/index.js');
     });
 
@@ -282,9 +292,9 @@ describe('error sanitization', () => {
 
     beforeEach(async () => {
       mockGet = vi.fn();
-      vi.mocked(BalancePlatformAPI).mockReturnValue({
-        AccountHoldersApi: { getAccountHolder: mockGet },
-      } as any);
+      vi.mocked(BalancePlatformAPI).mockImplementation(function() {
+        return { AccountHoldersApi: { getAccountHolder: mockGet } } as any;
+      });
       tools = await import('../src/tools/configuration/accountHolders/index.js');
     });
 
