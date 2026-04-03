@@ -20,8 +20,11 @@ const getLegalEntity = async (
   const legalEntityManagmentApi = new LegalEntityManagementAPI(client);
   try {
     return await legalEntityManagmentApi.LegalEntitiesApi.getLegalEntity(id);
-  } catch (e) {
-    return 'Failed to get legal entity. Error: ' + JSON.stringify(e);
+  } catch (e: unknown) {
+    return (
+      'Failed to get legal entity. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
+    );
   }
 };
 

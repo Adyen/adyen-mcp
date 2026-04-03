@@ -31,8 +31,11 @@ const listMerchantAccounts = async (
       pageNumber,
       pageSize,
     );
-  } catch (e) {
-    return 'Failed to list merchant accounts. Error: ' + JSON.stringify(e);
+  } catch (e: unknown) {
+    return (
+      'Failed to list merchant accounts. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
+    );
   }
 };
 
@@ -62,8 +65,11 @@ const getMerchantAccount = async (
     return await managementAPI.AccountMerchantLevelApi.getMerchantAccount(
       merchantId,
     );
-  } catch (e) {
-    return 'Failed to get merchant account. Error: ' + JSON.stringify(e);
+  } catch (e: unknown) {
+    return (
+      'Failed to get merchant account. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
+    );
   }
 };
 

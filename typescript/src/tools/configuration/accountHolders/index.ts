@@ -20,8 +20,11 @@ const getAccountHolder = async (
   const balancePlatformApi = new BalancePlatformAPI(client);
   try {
     return await balancePlatformApi.AccountHoldersApi.getAccountHolder(id);
-  } catch (e) {
-    return 'Failed to get account holder. Error: ' + JSON.stringify(e);
+  } catch (e: unknown) {
+    return (
+      'Failed to get account holder. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
+    );
   }
 };
 

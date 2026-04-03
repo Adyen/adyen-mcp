@@ -27,8 +27,11 @@ const createHostedOnboardingLink = async (
       id,
       {},
     );
-  } catch (e) {
-    return 'Failed to get account holder. Error: ' + JSON.stringify(e);
+  } catch (e: unknown) {
+    return (
+      'Failed to get account holder. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
+    );
   }
 };
 

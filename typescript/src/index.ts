@@ -60,9 +60,10 @@ async function main() {
   await server.connect(transport);
 }
 
-try {
-  main();
-} catch (e) {
-  console.error('An error occurred during main execution of Adyen MCP:', e);
+main().catch((e: unknown) => {
+  console.error(
+    'An error occurred during main execution of Adyen MCP:',
+    e instanceof Error ? e.message : e,
+  );
   process.exit(1);
-}
+});

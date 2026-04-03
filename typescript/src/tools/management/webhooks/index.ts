@@ -31,10 +31,10 @@ const listAllMerchantWebhooks = async (
       pageNumber,
       pageSize,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to list all webhook configurations on merchant account. Error: ' +
-      JSON.stringify(e)
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -65,10 +65,10 @@ const getMerchantWebhook = async (
       merchantId,
       webhookId,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to get merchant webhook configuration. Error: ' +
-      JSON.stringify(e)
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -99,10 +99,10 @@ const listAllCompanyWebhooks = async (
       pageNumber,
       pageSize,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
       'Failed to list all webhook configurations on company account. Error: ' +
-      JSON.stringify(e)
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
@@ -131,9 +131,10 @@ const getCompanyWebhook = async (
       companyId,
       webhookId,
     );
-  } catch (e) {
+  } catch (e: unknown) {
     return (
-      'Failed to get company webhook configuration. Error: ' + JSON.stringify(e)
+      'Failed to get company webhook configuration. Error: ' +
+      (e instanceof Error ? e.message : 'Unknown error')
     );
   }
 };
