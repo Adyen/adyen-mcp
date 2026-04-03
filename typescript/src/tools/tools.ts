@@ -26,6 +26,14 @@ import {
   listAllCompanyWebhooksTool,
   listAllMerchantWebhooksTool,
 } from './management/webhooks/index.js';
+import {
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+} from './management/apiCredentials/index.js';
+import {
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
+} from './management/allowedOrigins/index.js';
 import { AdyenConfig } from '../configurations/configurations';
 import { Tool } from './types';
 
@@ -48,6 +56,10 @@ export const tools: Tool[] = [
   getCompanyWebhookTool,
   listAllMerchantWebhooksTool,
   getMerchantWebhookTool,
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
 ];
 
 const availableToolNames = tools.map((i) => `'${i.name}'`).join(', ');
