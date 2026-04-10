@@ -36,10 +36,16 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - Get all payment methods - GET [`/merchants/{merchantId}/paymentMethodSettings`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/paymentMethodSettings)
    - Get payment method details - GET [`/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/paymentMethodSettings/(paymentMethodId))
 8. Management API - Users
-    - Get a list of users - GET [`/companies/{companyId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users)
-    - Get a list of users - GET [`/merchants/{merchantId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users)
-    - Get user details - GET [`companies/{companyId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users/(userId))
-    - Get user details - GET [`merchants/{merchantId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users/(userId))
+   - Get a list of users - GET [`/companies/{companyId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users)
+   - Get a list of users - GET [`/merchants/{merchantId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users)
+   - Get user details - GET [`companies/{companyId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users/(userId))
+   - Get user details - GET [`merchants/{merchantId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users/(userId))
+9. Management API - API Credentials
+   - List all API Credentials - GET [`/companies/{companyId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials)
+   - List all API Credentials - GET [`/merchants/{merchantId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials)
+10. Management API - Allowed Origins
+   - List all allowed origins - GET [`/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials/(apiCredentialId)/allowedOrigins)
+   - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
 
 ### Usage
 * Run the MCP server via `npx` with the following command:
@@ -90,6 +96,7 @@ Example usage in `.vscode`:
 * Management API — Webhooks read
 * Management API — Webhooks read and write
 * Management API — Payment methods read
+* Management API — API credentials read
 * Trigger webhook notifications
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
