@@ -40,6 +40,14 @@ import {
   listCompanyUsersTool,
   listMerchantUsersTool,
 } from './management/users/index.js';
+import {
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+} from './management/apiCredentials/index.js';
+import {
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
+} from './management/allowedOrigins/index.js';
 
 export const tools: Tool[] = [
   createPaymentLinkTool,
@@ -68,6 +76,10 @@ export const tools: Tool[] = [
   getMerchantUserDetailsTool,
   listAllPaymentMethodsMerchant,
   getPaymentMethodsDetailsMerchant,
+  listAllCompanyApiCredentialsTool,
+  listAllMerchantApiCredentialsTool,
+  listAllCompanyAllowedOriginsTool,
+  listAllMerchantAllowedOriginsTool,
 ];
 
 const availableToolNames = tools.map((i) => `'${i.name}'`).join(', ');
