@@ -44,8 +44,8 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - List all API Credentials - GET [`/companies/{companyId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials)
    - List all API Credentials - GET [`/merchants/{merchantId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials)
 10. Management API - Allowed Origins
-   - List all allowed origins - GET [`/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials/(apiCredentialId)/allowedOrigins)
-   - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
+    - List all allowed origins - GET [`/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials/(apiCredentialId)/allowedOrigins)
+    - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
 
 ### Usage
 * Run the MCP server via `npx` with the following command:

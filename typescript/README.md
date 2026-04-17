@@ -38,12 +38,12 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 9. Management API - API Credentials
    - Get a list of API Credentials
 10. Management API - Allowed Origins
-   - Get a list of allowed origins
+    - Get a list of allowed origins
 11. Configuration API - Account Holders
-   - Get account holder details and its capability settings.
+    - Get account holder details and its capability settings.
 12. Legal entity management API - Legal entities and onboarding links
-   - Get legal entity details and its KYC information. 
-   - Create an onboarding link for a legal entity. 
+    - Get legal entity details and its KYC information. 
+    - Create an onboarding link for a legal entity. 
 
 ### Usage
 To run to the MCP server via `npx` you can execute:
