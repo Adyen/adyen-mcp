@@ -9,23 +9,21 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
     environment: release
-    env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f
         with:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
-          always-auth: true
       - run: |
           set -e
           cd typescript
           npm ci
           npm run build
-          npm publish --access public
+          npm publish --provenance --access public
