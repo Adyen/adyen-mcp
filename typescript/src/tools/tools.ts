@@ -17,6 +17,7 @@ import {
   listMerchantAccountsTool,
 } from './management/accounts/index.js';
 import { terminalTools } from './management/terminals/index.js';
+import { terminalOrderTools } from './management/terminalOrders/index.js';
 import { createHostedOnboardingLinkTool } from './legalEntityManagement/onboardingLinks/index.js';
 import { getLegalEntityTool } from './legalEntityManagement/legalEntities/index.js';
 import { getAccountHolderTool } from './configuration/accountHolders/index.js';
@@ -61,6 +62,7 @@ export const tools: Tool[] = [
   getMerchantAccountsTool,
   cancelPaymentTool,
   ...terminalTools,
+  ...terminalOrderTools,
   createHostedOnboardingLinkTool,
   getLegalEntityTool,
   getAccountHolderTool,

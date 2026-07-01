@@ -46,6 +46,22 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
 10. Management API - Allowed Origins
     - List all allowed origins - GET [`/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials/(apiCredentialId)/allowedOrigins)
     - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
+11. Management API - Terminal Orders (company level)
+
+    These tools cover the full company-level terminal ordering flow. The typical sequence is: discover models → list orderable products for a country → resolve the billing entity → get or create a shipping location → place the order. Terminals are region-locked, so `/terminalProducts` requires a `country` and only returns what is orderable there. Billing entities are provisioned by Adyen during account onboarding and can only be listed (there is no create-billing-entity endpoint). Orders can only be updated or cancelled while their status is `Placed`. To make these requests, your API credential needs the **Management API — Terminal ordering read** and **Management API — Terminal ordering read and write** roles.
+
+    - `list_terminal_models` - Gets the terminal models the company can order - GET [`/companies/{companyId}/terminalModels`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalModels)
+    - `list_terminal_products` - Gets orderable products for a country (and optional model) - GET [`/companies/{companyId}/terminalProducts`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalProducts)
+    - `list_billing_entities` - Lists billing entities the order can be charged to - GET [`/companies/{companyId}/billingEntities`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/billingEntities)
+    - `list_shipping_locations` - Lists existing shipping locations - GET [`/companies/{companyId}/shippingLocations`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/shippingLocations)
+    - `create_shipping_location` - Creates a new shipping location - POST [`/companies/{companyId}/shippingLocations`](https://docs.adyen.com/api-explorer/Management/3/post/companies/(companyId)/shippingLocations)
+    - `create_terminal_order` - Places a terminal order - POST [`/companies/{companyId}/terminalOrders`](https://docs.adyen.com/api-explorer/Management/3/post/companies/(companyId)/terminalOrders)
+    - `list_terminal_orders` - Lists orders (filter by reference/status) - GET [`/companies/{companyId}/terminalOrders`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalOrders)
+    - `get_terminal_order` - Gets a single order - GET [`/companies/{companyId}/terminalOrders/{orderId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/terminalOrders/(orderId))
+    - `update_terminal_order` - Updates a `Placed` order (items replace the whole array) - PATCH [`/companies/{companyId}/terminalOrders/{orderId}`](https://docs.adyen.com/api-explorer/Management/3/patch/companies/(companyId)/terminalOrders/(orderId))
+    - `cancel_terminal_order` - Cancels a `Placed` order - POST [`/companies/{companyId}/terminalOrders/{orderId}/cancel`](https://docs.adyen.com/api-explorer/Management/3/post/companies/(companyId)/terminalOrders/(orderId)/cancel)
+
+    All of these accept a company ID or a merchant ID (a merchant ID is auto-resolved to its company ID).
 
 ### Usage
 * Run the MCP server via `npx` with the following command:
@@ -97,6 +113,8 @@ Example usage in `.vscode`:
 * Management API — Webhooks read and write
 * Management API — Payment methods read
 * Management API — API credentials read
+* Management API — Terminal ordering read
+* Management API — Terminal ordering read and write
 * Trigger webhook notifications
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.
