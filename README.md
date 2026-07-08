@@ -40,6 +40,10 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
    - Get a list of users - GET [`/merchants/{merchantId}/users`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users)
    - Get user details - GET [`companies/{companyId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/users/(userId))
    - Get user details - GET [`merchants/{merchantId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/users/(userId))
+   - Update a user - PATCH [`/companies/{companyId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/patch/companies/(companyId)/users/(userId)). The user is identified by `userId`, `email`, or `username` (the id is resolved internally); supports activate/deactivate, adding or removing roles without overwriting, and setting associated merchant accounts.
+   - Update a user - PATCH [`/merchants/{merchantId}/users/{userId}`](https://docs.adyen.com/api-explorer/Management/3/patch/merchants/(merchantId)/users/(userId)). The user is identified by `userId`, `email`, or `username` (the id is resolved internally); supports activate/deactivate and adding, removing, or replacing roles.
+
+   The update tools resolve the user from `email`/`username` via the list endpoint and make no change when the identifier matches zero or multiple users. Bulk changes (for example deactivating many users, or assigning a role to a list of users) are performed by calling the tool once per user. These tools work in both `TEST` and `LIVE`; for `LIVE` you must pass `--env=LIVE --livePrefix=YOUR_PREFIX_URL`. Treat bulk deactivation and role removal as high-impact operations. The webservice user needs `Management API — Users read` (for resolution) and `Management API — Users read and write` (for the update); grant the minimum roles required for your use case.
 9. Management API - API Credentials
    - List all API Credentials - GET [`/companies/{companyId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/companies/(companyId)/apiCredentials)
    - List all API Credentials - GET [`/merchants/{merchantId}/apiCredentials`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials)
@@ -97,6 +101,8 @@ Example usage in `.vscode`:
 * Management API — Webhooks read and write
 * Management API — Payment methods read
 * Management API — API credentials read
+* Management API — Users read
+* Management API — Users read and write
 * Trigger webhook notifications
 
 Adyen recommends creating a new webservice user and generating a new API key for the purpose of this application.

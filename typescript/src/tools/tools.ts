@@ -39,6 +39,8 @@ import {
   getMerchantUserDetailsTool,
   listCompanyUsersTool,
   listMerchantUsersTool,
+  updateCompanyUserTool,
+  updateMerchantUserTool,
 } from './management/users/index.js';
 import {
   listAllCompanyApiCredentialsTool,
@@ -74,6 +76,8 @@ export const tools: Tool[] = [
   getCompanyUserDetailsTool,
   listMerchantUsersTool,
   getMerchantUserDetailsTool,
+  updateCompanyUserTool,
+  updateMerchantUserTool,
   listAllPaymentMethodsMerchant,
   getPaymentMethodsDetailsMerchant,
   listAllCompanyApiCredentialsTool,
