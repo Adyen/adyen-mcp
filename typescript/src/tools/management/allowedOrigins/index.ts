@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const listAllMerchantAllowedOriginsRequestObject = z.object({
   merchantId: z
@@ -34,6 +35,7 @@ const listAllMerchantAllowedOrigins = async (
 
 export const listAllMerchantAllowedOriginsTool: Tool = {
   name: 'list_all_merchant_allowed_origins',
+  annotations: readOnly('List merchant allowed origins'),
   description:
     'Returns the list of allowed origins for the API credential identified in the path.',
   arguments: listAllMerchantAllowedOriginsRequestObject,
@@ -72,6 +74,7 @@ const listAllCompanyAllowedOrigins = async (
 
 export const listAllCompanyAllowedOriginsTool: Tool = {
   name: 'list_all_company_allowed_origins',
+  annotations: readOnly('List company allowed origins'),
   description:
     'Returns the list of allowed origins for the API credential identified in the path.',
   arguments: listAllCompanyAllowedOriginsRequestObject,

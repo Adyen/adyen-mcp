@@ -9,6 +9,7 @@ import {
   GET_PAYMENT_SESSION_NAME,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { readOnly, writes } from '../../annotations.js';
 
 const paymentSessionRequestShape: z.ZodRawShape = {
   currency: z.string(),
@@ -105,6 +106,7 @@ const getPaymentMethods = async (
 
 export const createPaymentSessionTool: Tool = {
   name: CREATE_PAYMENT_SESSION_NAME,
+  annotations: writes('Create payment session', false),
   description: CREATE_PAYMENT_SESSION_DESCRIPTION,
   arguments: paymentSessionObject,
   invoke: createPaymentSession,
@@ -112,6 +114,7 @@ export const createPaymentSessionTool: Tool = {
 
 export const getPaymentSessionTool: Tool = {
   name: GET_PAYMENT_SESSION_NAME,
+  annotations: readOnly('Get payment session'),
   description: GET_PAYMENT_SESSION_DESCRIPTION,
   arguments: getPaymentSessionObject,
   invoke: getPaymentSession,
@@ -119,6 +122,7 @@ export const getPaymentSessionTool: Tool = {
 
 export const getPaymentMethodsTool: Tool = {
   name: GET_PAYMENT_METHODS_NAME,
+  annotations: readOnly('Get payment methods'),
   description: GET_PAYMENT_METHODS_DESCRIPTION,
   arguments: getPaymentMethodsObject,
   invoke: getPaymentMethods,

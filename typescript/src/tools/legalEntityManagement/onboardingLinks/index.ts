@@ -5,6 +5,7 @@ import {
   CREATE_HOSTED_ONBOARDING_LINK_NAME,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { writes } from '../../annotations.js';
 
 const createHostedOnboardingLinkShape: z.ZodRawShape = {
   id: z.string(),
@@ -37,6 +38,7 @@ const createHostedOnboardingLink = async (
 
 export const createHostedOnboardingLinkTool: Tool = {
   name: CREATE_HOSTED_ONBOARDING_LINK_NAME,
+  annotations: writes('Create hosted onboarding link', false),
   description: CREATE_HOSTED_ONBOARDING_LINK_DESCRIPTION,
   arguments: createHostedOnboardingLinkObject,
   invoke: createHostedOnboardingLink,

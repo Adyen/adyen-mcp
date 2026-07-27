@@ -40,6 +40,7 @@ async function main() {
       tool.name,
       {
         description: tool.description,
+        annotations: tool.annotations,
         inputSchema: tool.arguments.shape,
       },
       async (args: any, _extra: RequestHandlerExtra<any, any>) => {

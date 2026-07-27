@@ -4,6 +4,7 @@ import { ScheduleTerminalActionsRequest } from '@adyen/api-library/lib/src/typin
 import { TerminalSettings } from '@adyen/api-library/lib/src/typings/management/terminalSettings.js';
 import * as constants from './constants.js'; // Group constants under a namespace
 import * as schemas from './schemas.js';
+import { readOnly, writes } from '../../annotations.js';
 import { createTool } from './toolFactory.js';
 
 // =================================================================
@@ -35,6 +36,7 @@ async function resolveCompanyId(
 
 const createTerminalActionTool = createTool({
   name: constants.CREATE_TERMINAL_ACTION_NAME,
+  annotations: writes('Create terminal action', true),
   description: constants.CREATE_TERMINAL_ACTION_DESCRIPTION,
   schema: {
     ...schemas.scheduleTerminalActionsRequestSchema.shape,
@@ -47,6 +49,7 @@ const createTerminalActionTool = createTool({
 
 const getAndroidAppTool = createTool({
   name: constants.GET_ANDROID_APP_NAME,
+  annotations: readOnly('Get Android app'),
   description: constants.GET_ANDROID_APP_DESCRIPTION,
   schema: {
     id: z.string().describe('The unique identifier of the Android app.'),
@@ -62,6 +65,7 @@ const getAndroidAppTool = createTool({
 
 const getTerminalSettingsTool = createTool({
   name: constants.GET_TERMINAL_SETTINGS_NAME,
+  annotations: readOnly('Get terminal settings'),
   description: constants.GET_TERMINAL_SETTINGS_DESCRIPTION,
   schema: {
     level: z
@@ -92,6 +96,7 @@ const getTerminalSettingsTool = createTool({
 
 const listAndroidAppsTool = createTool({
   name: constants.LIST_ANDROID_APPS_NAME,
+  annotations: readOnly('List Android apps'),
   description: constants.LIST_ANDROID_APPS_DESCRIPTION,
   schema: {
     companyId: z
@@ -130,6 +135,7 @@ const listAndroidAppsTool = createTool({
 
 const listAndroidCertificatesTool = createTool({
   name: constants.LIST_ANDROID_CERTIFICATES_NAME,
+  annotations: readOnly('List Android certificates'),
   description: constants.LIST_ANDROID_CERTIFICATES_DESCRIPTION,
   schema: {
     companyId: z
@@ -163,6 +169,7 @@ const listAndroidCertificatesTool = createTool({
 
 const listTerminalsTool = createTool({
   name: constants.LIST_TERMINALS_NAME,
+  annotations: readOnly('List terminals'),
   description: constants.LIST_TERMINALS_DESCRIPTION,
   schema: {
     searchQuery: z
@@ -227,6 +234,7 @@ const listTerminalsTool = createTool({
 
 const listTerminalActionsTool = createTool({
   name: constants.LIST_TERMINAL_ACTIONS_NAME,
+  annotations: readOnly('List terminal actions'),
   description: constants.LIST_TERMINAL_ACTIONS_DESCRIPTION,
   schema: {
     companyId: z
@@ -269,6 +277,7 @@ const listTerminalActionsTool = createTool({
 
 const reassignTerminalTool = createTool({
   name: constants.REASSIGN_TERMINAL_NAME,
+  annotations: writes('Reassign terminal', true),
   description: constants.REASSIGN_TERMINAL_DESCRIPTION,
   schema: {
     terminalId: z
@@ -307,6 +316,7 @@ const reassignTerminalTool = createTool({
 
 const updateTerminalSettingsTool = createTool({
   name: constants.UPDATE_TERMINAL_SETTINGS_NAME,
+  annotations: writes('Update terminal settings', true),
   description: constants.UPDATE_TERMINAL_SETTINGS_DESCRIPTION,
   schema: {
     level: z

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 import {
   GET_PAYMENT_METHODS_DETAILS_MERCHANT,
   GET_PAYMENT_METHODS_DETAILS_MERCHANT_DESCRIPTION,
@@ -41,6 +42,7 @@ const listAllPaymentMethods = async (
 
 export const listAllPaymentMethodsMerchant: Tool = {
   name: LIST_ALL_PAYMENT_METHODS_MERCHANT,
+  annotations: readOnly('List merchant payment methods'),
   description: LIST_ALL_PAYMENT_METHODS_MERCHANT_DESCRIPTION,
   arguments: listAllPaymentMethodsRequestObject,
   invoke: listAllPaymentMethods,
@@ -73,6 +75,7 @@ const getPaymentMethodsDetails = async (
 
 export const getPaymentMethodsDetailsMerchant: Tool = {
   name: GET_PAYMENT_METHODS_DETAILS_MERCHANT,
+  annotations: readOnly('Get merchant payment method details'),
   description: GET_PAYMENT_METHODS_DETAILS_MERCHANT_DESCRIPTION,
   arguments: getPaymentMethodsRequestObject,
   invoke: getPaymentMethodsDetails,

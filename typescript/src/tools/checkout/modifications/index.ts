@@ -7,6 +7,7 @@ import {
   REFUND_PAYMENT_NAME,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { writes } from '../../annotations.js';
 
 const refundPaymentRequestShape: z.ZodRawShape = {
   pspReference: z.string(),
@@ -81,6 +82,7 @@ const cancelPayment = async (
 
 export const refundPaymentTool: Tool = {
   name: REFUND_PAYMENT_NAME,
+  annotations: writes('Refund payment', true),
   description: REFUND_PAYMENT_DESCRIPTION,
   arguments: refundPaymentObject,
   invoke: refundPayment,
@@ -88,6 +90,7 @@ export const refundPaymentTool: Tool = {
 
 export const cancelPaymentTool: Tool = {
   name: CANCEL_PAYMENT_NAME,
+  annotations: writes('Cancel payment', true),
   description: CANCEL_PAYMENT_DESCRIPTION,
   arguments: cancelPaymentObject,
   invoke: cancelPayment,
