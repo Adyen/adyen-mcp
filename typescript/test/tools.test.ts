@@ -51,6 +51,20 @@ describe('tools', () => {
         expect(names).toContain('create_payment_links');
         expect(names).toContain('get_merchant_account');
       });
+
+      it('should expose the user update tools', () => {
+        const userUpdateToolNames = [
+          'update_company_user',
+          'update_merchant_user',
+        ];
+        const config = createConfig({ tools: userUpdateToolNames });
+        const result = getActiveTools(config);
+
+        expect(result.size).toBe(userUpdateToolNames.length);
+
+        const names = Array.from(result).map((t) => t.name);
+        userUpdateToolNames.forEach((name) => expect(names).toContain(name));
+      });
     });
 
     describe('combined filtering & deduplication', () => {
