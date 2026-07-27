@@ -38,7 +38,7 @@ const createHostedOnboardingLink = async (
 
 export const createHostedOnboardingLinkTool: Tool = {
   name: CREATE_HOSTED_ONBOARDING_LINK_NAME,
-  annotations: writes('Create hosted onboarding link', false),
+  annotations: writes('Create hosted onboarding link', { destructive: false }),
   description: CREATE_HOSTED_ONBOARDING_LINK_DESCRIPTION,
   arguments: createHostedOnboardingLinkObject,
   invoke: createHostedOnboardingLink,

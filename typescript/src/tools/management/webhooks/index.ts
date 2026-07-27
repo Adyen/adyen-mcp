@@ -184,7 +184,7 @@ const testMerchantWebhook = async (
 
 export const testMerchantWebhookTool: Tool = {
   name: TEST_MERCHANT_WEBHOOK,
-  annotations: writes('Test merchant webhook', false),
+  annotations: writes('Test merchant webhook', { destructive: false }),
   description: TEST_MERCHANT_WEBHOOK_DESCRIPTION,
   arguments: testMerchantWebhookRequestObject,
   invoke: testMerchantWebhook,
@@ -220,7 +220,7 @@ const testCompanyWebhook = async (
 
 export const testCompanyWebhookTool: Tool = {
   name: TEST_COMPANY_WEBHOOK,
-  annotations: writes('Test company webhook', false),
+  annotations: writes('Test company webhook', { destructive: false }),
   description: TEST_COMPANY_WEBHOOK_DESCRIPTION,
   arguments: testCompanyWebhookRequestObject,
   invoke: testCompanyWebhook,

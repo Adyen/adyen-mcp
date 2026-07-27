@@ -36,7 +36,8 @@ async function resolveCompanyId(
 
 const createTerminalActionTool = createTool({
   name: constants.CREATE_TERMINAL_ACTION_NAME,
-  annotations: writes('Create terminal action', true),
+  // Uninstall actions cannot be retracted through the public API once confirmed.
+  annotations: writes('Create terminal action', { destructive: true }),
   description: constants.CREATE_TERMINAL_ACTION_DESCRIPTION,
   schema: {
     ...schemas.scheduleTerminalActionsRequestSchema.shape,
@@ -277,7 +278,7 @@ const listTerminalActionsTool = createTool({
 
 const reassignTerminalTool = createTool({
   name: constants.REASSIGN_TERMINAL_NAME,
-  annotations: writes('Reassign terminal', true),
+  annotations: writes('Reassign terminal', { destructive: true }),
   description: constants.REASSIGN_TERMINAL_DESCRIPTION,
   schema: {
     terminalId: z
@@ -316,7 +317,11 @@ const reassignTerminalTool = createTool({
 
 const updateTerminalSettingsTool = createTool({
   name: constants.UPDATE_TERMINAL_SETTINGS_NAME,
-  annotations: writes('Update terminal settings', true),
+  // Explicit null values remove stored settings even though omitted fields are unchanged.
+  annotations: writes('Update terminal settings', {
+    destructive: true,
+    idempotent: true,
+  }),
   description: constants.UPDATE_TERMINAL_SETTINGS_DESCRIPTION,
   schema: {
     level: z

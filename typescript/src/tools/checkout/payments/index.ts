@@ -106,7 +106,7 @@ const getPaymentMethods = async (
 
 export const createPaymentSessionTool: Tool = {
   name: CREATE_PAYMENT_SESSION_NAME,
-  annotations: writes('Create payment session', false),
+  annotations: writes('Create payment session', { destructive: false }),
   description: CREATE_PAYMENT_SESSION_DESCRIPTION,
   arguments: paymentSessionObject,
   invoke: createPaymentSession,

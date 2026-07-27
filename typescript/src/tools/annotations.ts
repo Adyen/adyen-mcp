@@ -10,11 +10,11 @@ export const readOnly = (title: string): ToolAnnotations => ({
 
 export const writes = (
   title: string,
-  destructive: boolean,
+  options: { destructive: boolean; idempotent?: boolean },
 ): ToolAnnotations => ({
   title,
   readOnlyHint: false,
-  destructiveHint: destructive,
-  idempotentHint: false,
+  destructiveHint: options.destructive,
+  idempotentHint: options.idempotent ?? false,
   openWorldHint: true,
 });

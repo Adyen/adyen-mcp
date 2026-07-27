@@ -101,7 +101,7 @@ const updatePaymentLink = async (
 
 export const createPaymentLinkTool: Tool = {
   name: CREATE_PAYMENT_LINKS_NAME,
-  annotations: writes('Create payment link', false),
+  annotations: writes('Create payment link', { destructive: false }),
   description: CREATE_PAYMENT_LINKS_DESCRIPTION,
   arguments: createPaymentLinkObject,
   invoke: createPaymentLink,
@@ -117,7 +117,10 @@ export const getPaymentLinkTool: Tool = {
 
 export const updatePaymentLinkTool: Tool = {
   name: UPDATE_PAYMENT_LINK_NAME,
-  annotations: writes('Update payment link', true),
+  annotations: writes('Update payment link', {
+    destructive: true,
+    idempotent: true,
+  }),
   description: UPDATE_PAYMENT_LINK_DESCRIPTION,
   arguments: updatePaymentLinkObject,
   invoke: updatePaymentLink,
