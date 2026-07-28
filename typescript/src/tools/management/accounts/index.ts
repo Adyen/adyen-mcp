@@ -7,6 +7,7 @@ import {
   LIST_MERCHANT_ACCOUNTS_NAME,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const listMerchantAccountsRequestShape: z.ZodRawShape = {
   pageSize: z.number(),
@@ -41,6 +42,7 @@ const listMerchantAccounts = async (
 
 export const listMerchantAccountsTool: Tool = {
   name: LIST_MERCHANT_ACCOUNTS_NAME,
+  annotations: readOnly('List merchant accounts'),
   description: LIST_MERCHANT_ACCOUNTS_DESCRIPTION,
   arguments: listMerchantAccountsRequestObject,
   invoke: listMerchantAccounts,
@@ -75,6 +77,7 @@ const getMerchantAccount = async (
 
 export const getMerchantAccountsTool: Tool = {
   name: GET_MERCHANT_ACCOUNTS_NAME,
+  annotations: readOnly('Get merchant account'),
   description: GET_MERCHANT_ACCOUNTS_DESCRIPTION,
   arguments: getMerchantAccountRequestObject,
   invoke: getMerchantAccount,

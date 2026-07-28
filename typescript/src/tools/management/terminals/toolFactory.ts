@@ -1,11 +1,13 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
+import { ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 import { Tool } from '../../types.js';
 
 // The generic factory function to create any tool using ManagementAPI
 export function createTool<T extends z.ZodRawShape>(config: {
   name: string;
   description: string;
+  annotations: ToolAnnotations;
   schema: T;
   // This function contains the unique API call for the tool
   apiCall: (api: ManagementAPI, args: z.infer<z.ZodObject<T>>) => Promise<any>;
@@ -35,6 +37,7 @@ export function createTool<T extends z.ZodRawShape>(config: {
   return {
     name: config.name,
     description: config.description,
+    annotations: config.annotations,
     arguments: argumentSchema,
     invoke: invoke as (client: Client, args: any) => Promise<any>,
   };

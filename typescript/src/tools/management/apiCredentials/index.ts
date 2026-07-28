@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const listAllMerchantApiCredentialsRequestObject = z.object({
   merchantId: z
@@ -43,6 +44,7 @@ const listAllMerchantApiCredentials = async (
 
 export const listAllMerchantApiCredentialsTool: Tool = {
   name: 'list_all_merchant_api_credentials',
+  annotations: readOnly('List merchant API credentials'),
   description:
     'Returns the list of API credentials for the merchant account. The list is grouped into pages as defined by the query parameters.',
   arguments: listAllMerchantApiCredentialsRequestObject,
@@ -90,6 +92,7 @@ const listAllCompanyApiCredentials = async (
 
 export const listAllCompanyApiCredentialsTool: Tool = {
   name: 'list_all_company_api_credentials',
+  annotations: readOnly('List company API credentials'),
   description:
     'Returns the list of API credentials for the company account. The list is grouped into pages as defined by the query parameters.',
   arguments: listAllCompanyApiCredentialsRequestObject,

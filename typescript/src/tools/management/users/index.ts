@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const listCompanyUsersRequestObject = z.object({
   companyId: z
@@ -48,6 +49,7 @@ const listCompanyUsers = async (
 
 export const listCompanyUsersTool: Tool = {
   name: 'list_company_users',
+  annotations: readOnly('List company users'),
   description:
     'Returns the list of users for the companyId identified in the path.',
   arguments: listCompanyUsersRequestObject,
@@ -83,6 +85,7 @@ const getCompanyUserDetails = async (
 
 export const getCompanyUserDetailsTool: Tool = {
   name: 'get_company_user_details',
+  annotations: readOnly('Get company user details'),
   description:
     'Returns user details for the userId and the companyId identified in the path.',
   arguments: getCompanyUserDetailsRequestObject,
@@ -133,6 +136,7 @@ const listMerchantUsers = async (
 
 export const listMerchantUsersTool: Tool = {
   name: 'list_merchant_users',
+  annotations: readOnly('List merchant users'),
   description:
     'Returns a list of users associated with the merchantId specified in the path.',
   arguments: listMerchantUsersRequestObject,
@@ -166,6 +170,7 @@ const getMerchantUserDetails = async (
 
 export const getMerchantUserDetailsTool: Tool = {
   name: 'get_merchant_user_details',
+  annotations: readOnly('Get merchant user details'),
   description:
     'Returns user details for the userId and the merchantId specified in the path.',
   arguments: getMerchantUserDetailsRequestObject,

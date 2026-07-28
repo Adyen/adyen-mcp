@@ -10,7 +10,91 @@ import {
 import { AdyenConfig } from '../src/configurations/configurations.js';
 import { getActiveTools, tools } from '../src/tools/tools';
 
+type ExpectedToolAnnotations = {
+  readOnlyHint: boolean;
+  destructiveHint: boolean;
+  idempotentHint: boolean;
+};
+
+const readOnly: ExpectedToolAnnotations = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+};
+
+const writes = (
+  destructiveHint: boolean,
+  idempotentHint = false,
+): ExpectedToolAnnotations => ({
+  readOnlyHint: false,
+  destructiveHint,
+  idempotentHint,
+});
+
+const expectedToolAnnotations: Record<string, ExpectedToolAnnotations> = {
+  create_payment_links: writes(false),
+  get_payment_link: readOnly,
+  update_payment_link: writes(true, true),
+  refund_payment: writes(true),
+  create_payment_session: writes(false),
+  get_payment_session: readOnly,
+  get_payment_methods: readOnly,
+  list_merchant_accounts: readOnly,
+  get_merchant_account: readOnly,
+  cancel_payment: writes(true),
+  create_terminal_action: writes(true),
+  get_android_app: readOnly,
+  get_terminal_settings: readOnly,
+  list_android_apps: readOnly,
+  list_android_certificates: readOnly,
+  list_terminals: readOnly,
+  list_terminal_actions: readOnly,
+  reassign_terminal: writes(true),
+  update_terminal_settings: writes(true, true),
+  create_hosted_onboarding_link: writes(false),
+  get_legal_entity: readOnly,
+  get_account_holder: readOnly,
+  list_all_company_webhooks: readOnly,
+  get_company_webhook: readOnly,
+  test_company_webhook: writes(false),
+  list_all_merchant_webhooks: readOnly,
+  get_merchant_webhook: readOnly,
+  test_merchant_webhook: writes(false),
+  list_company_users: readOnly,
+  get_company_user_details: readOnly,
+  list_merchant_users: readOnly,
+  get_merchant_user_details: readOnly,
+  list_all_payment_methods_merchant: readOnly,
+  get_payment_methods_details_merchant: readOnly,
+  list_all_company_api_credentials: readOnly,
+  list_all_merchant_api_credentials: readOnly,
+  list_all_company_allowed_origins: readOnly,
+  list_all_merchant_allowed_origins: readOnly,
+};
+
 describe('tools', () => {
+  it('classifies every exposed tool with MCP annotations', () => {
+    const toolNames = tools.map((tool) => tool.name);
+
+    expect(toolNames).toHaveLength(Object.keys(expectedToolAnnotations).length);
+    expect(new Set(toolNames).size).toBe(toolNames.length);
+    expect(new Set(toolNames)).toEqual(
+      new Set(Object.keys(expectedToolAnnotations)),
+    );
+
+    for (const tool of tools) {
+      expect(tool.annotations.title).toEqual(expect.any(String));
+      expect(tool.annotations.title).not.toHaveLength(0);
+      expect(tool.annotations).toMatchObject({
+        ...expectedToolAnnotations[tool.name],
+        openWorldHint: true,
+      });
+      expect(
+        tool.annotations.readOnlyHint && tool.annotations.destructiveHint,
+      ).toBe(false);
+    }
+  });
+
   describe('getActiveTools', () => {
     const totalToolsCount = tools.length;
     const createConfig = (

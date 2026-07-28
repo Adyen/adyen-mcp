@@ -63,6 +63,8 @@ We advise to only run a subset of tools required for your particular use case:
 npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
 ```
 
+Tools include MCP annotations that identify read-only and destructive operations. Clients can use these hints to request confirmation before invoking write tools.
+
 **Note:** To run certain functionality (tools) in the mcp-server, you need a webservice user with the following roles: 
 * Management API - Accounts Read
 * Management API - Payment methods Read

@@ -5,6 +5,7 @@ import {
   GET_LEGAL_ENTITY_DESCRIPTION,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const getLegalEntityRequestShape: z.ZodRawShape = {
   id: z.string(),
@@ -30,6 +31,7 @@ const getLegalEntity = async (
 
 export const getLegalEntityTool: Tool = {
   name: GET_LEGAL_ENTITY_NAME,
+  annotations: readOnly('Get legal entity'),
   description: GET_LEGAL_ENTITY_DESCRIPTION,
   arguments: getLegalEntityObject,
   invoke: getLegalEntity,

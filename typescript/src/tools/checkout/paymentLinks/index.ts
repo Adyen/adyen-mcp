@@ -9,6 +9,7 @@ import {
   UPDATE_PAYMENT_LINK_NAME,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { readOnly, writes } from '../../annotations.js';
 
 const createPaymentLinkRequestShape: z.ZodRawShape = {
   currency: z.string(),
@@ -100,6 +101,7 @@ const updatePaymentLink = async (
 
 export const createPaymentLinkTool: Tool = {
   name: CREATE_PAYMENT_LINKS_NAME,
+  annotations: writes('Create payment link', { destructive: false }),
   description: CREATE_PAYMENT_LINKS_DESCRIPTION,
   arguments: createPaymentLinkObject,
   invoke: createPaymentLink,
@@ -107,6 +109,7 @@ export const createPaymentLinkTool: Tool = {
 
 export const getPaymentLinkTool: Tool = {
   name: GET_PAYMENT_LINK_NAME,
+  annotations: readOnly('Get payment link'),
   description: GET_PAYMENT_LINK_DESCRIPTION,
   arguments: getPaymentLinkObject,
   invoke: getPaymentLink,
@@ -114,6 +117,10 @@ export const getPaymentLinkTool: Tool = {
 
 export const updatePaymentLinkTool: Tool = {
   name: UPDATE_PAYMENT_LINK_NAME,
+  annotations: writes('Update payment link', {
+    destructive: true,
+    idempotent: true,
+  }),
   description: UPDATE_PAYMENT_LINK_DESCRIPTION,
   arguments: updatePaymentLinkObject,
   invoke: updatePaymentLink,

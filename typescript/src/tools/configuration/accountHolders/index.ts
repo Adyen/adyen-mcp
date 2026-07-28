@@ -5,6 +5,7 @@ import {
   GET_ACCOUNT_HOLDER_DESCRIPTION,
 } from './constants.js';
 import { Tool } from '../../types.js';
+import { readOnly } from '../../annotations.js';
 
 const getAccountHolderRequestShape: z.ZodRawShape = {
   id: z.string(),
@@ -30,6 +31,7 @@ const getAccountHolder = async (
 
 export const getAccountHolderTool: Tool = {
   name: GET_ACCOUNT_HOLDER_NAME,
+  annotations: readOnly('Get account holder'),
   description: GET_ACCOUNT_HOLDER_DESCRIPTION,
   arguments: getAccountHolderObject,
   invoke: getAccountHolder,

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Client, ManagementAPI } from '@adyen/api-library';
 import { Tool } from '../../types.js';
+import { readOnly, writes } from '../../annotations.js';
 import {
   GET_COMPANY_WEBHOOK,
   GET_COMPANY_WEBHOOK_DESCRIPTION,
@@ -45,6 +46,7 @@ const listAllMerchantWebhooks = async (
 
 export const listAllMerchantWebhooksTool: Tool = {
   name: LIST_ALL_MERCHANT_WEBHOOKS,
+  annotations: readOnly('List merchant webhooks'),
   description: LIST_ALL_MERCHANT_WEBHOOKS_DESCRIPTION,
   arguments: listAllMerchantWebhooksRequestObject,
   invoke: listAllMerchantWebhooks,
@@ -79,6 +81,7 @@ const getMerchantWebhook = async (
 
 export const getMerchantWebhookTool: Tool = {
   name: GET_MERCHANT_WEBHOOK,
+  annotations: readOnly('Get merchant webhook'),
   description: GET_MERCHANT_WEBHOOK_DESCRIPTION,
   arguments: getMerchantWebhookRequestObject,
   invoke: getMerchantWebhook,
@@ -113,6 +116,7 @@ const listAllCompanyWebhooks = async (
 
 export const listAllCompanyWebhooksTool: Tool = {
   name: LIST_ALL_COMPANY_WEBHOOKS,
+  annotations: readOnly('List company webhooks'),
   description: LIST_ALL_COMPANY_WEBHOOKS_DESCRIPTION,
   arguments: listAllCompanyWebhooksRequestObject,
   invoke: listAllCompanyWebhooks,
@@ -145,6 +149,7 @@ const getCompanyWebhook = async (
 
 export const getCompanyWebhookTool: Tool = {
   name: GET_COMPANY_WEBHOOK,
+  annotations: readOnly('Get company webhook'),
   description: GET_COMPANY_WEBHOOK_DESCRIPTION,
   arguments: getCompanyWebhookRequestObject,
   invoke: getCompanyWebhook,
@@ -179,6 +184,7 @@ const testMerchantWebhook = async (
 
 export const testMerchantWebhookTool: Tool = {
   name: TEST_MERCHANT_WEBHOOK,
+  annotations: writes('Test merchant webhook', { destructive: false }),
   description: TEST_MERCHANT_WEBHOOK_DESCRIPTION,
   arguments: testMerchantWebhookRequestObject,
   invoke: testMerchantWebhook,
@@ -214,6 +220,7 @@ const testCompanyWebhook = async (
 
 export const testCompanyWebhookTool: Tool = {
   name: TEST_COMPANY_WEBHOOK,
+  annotations: writes('Test company webhook', { destructive: false }),
   description: TEST_COMPANY_WEBHOOK_DESCRIPTION,
   arguments: testCompanyWebhookRequestObject,
   invoke: testCompanyWebhook,
