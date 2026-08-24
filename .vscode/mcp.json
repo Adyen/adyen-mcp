@@ -4,8 +4,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "/workspaces/adyen-mcp/typescript/dist/index.js", 
-        "--adyenApiKey", "${ADYEN_API_KEY}",
+        "/workspaces/adyen-mcp/typescript/dist/index.js",
         "--env", "TEST"
       ],
       "env": {

@@ -4,10 +4,22 @@ import { MockInstance } from 'vitest';
 describe('configurations', () => {
   // Store original process.argv to restore after tests
   const originalArgv = process.argv;
+  // Store original ADYEN_API_KEY to restore after tests
+  const originalApiKeyEnv = process.env.ADYEN_API_KEY;
+
+  beforeEach(() => {
+    // Ensure tests are not affected by a real ADYEN_API_KEY in the environment
+    delete process.env.ADYEN_API_KEY;
+  });
 
   afterEach(() => {
-    // Restore original process.argv after each test
+    // Restore original process.argv and ADYEN_API_KEY after each test
     process.argv = originalArgv;
+    if (originalApiKeyEnv === undefined) {
+      delete process.env.ADYEN_API_KEY;
+    } else {
+      process.env.ADYEN_API_KEY = originalApiKeyEnv;
+    }
   });
 
   describe('getAdyenConfig', () => {
@@ -61,17 +73,87 @@ describe('configurations', () => {
       });
     });
 
+    describe('ADYEN_API_KEY environment variable fallback', () => {
+      it('should use ADYEN_API_KEY env var when --adyenApiKey is not provided', () => {
+        process.env.ADYEN_API_KEY = 'env-api-key';
+        const args = ['--env', 'TEST'];
+        const config = getAdyenConfig(args);
+
+        expect(config.adyenApiKey).toBe('env-api-key');
+        expect(config.env).toBe('TEST');
+      });
+
+      it('should prefer --adyenApiKey over the ADYEN_API_KEY env var', () => {
+        process.env.ADYEN_API_KEY = 'env-api-key';
+        const args = ['--adyenApiKey', 'argv-api-key', '--env', 'TEST'];
+        const config = getAdyenConfig(args);
+
+        expect(config.adyenApiKey).toBe('argv-api-key');
+      });
+
+      it('should throw error when no API key is provided', () => {
+        const args = ['--env', 'TEST'];
+
+        expect(() => getAdyenConfig(args)).toThrow(/ADYEN_API_KEY/);
+      });
+
+      it('should warn when the API key is passed via argv in LIVE environment', () => {
+        const consoleSpy = vi
+          .spyOn(console, 'error')
+          .mockImplementation(() => {});
+        try {
+          const args = [
+            '--adyenApiKey',
+            'live-api-key',
+            '--env',
+            'LIVE',
+            '--livePrefix',
+            'https://example.adyen.com',
+          ];
+          const config = getAdyenConfig(args);
+
+          expect(config.adyenApiKey).toBe('live-api-key');
+          expect(consoleSpy).toHaveBeenCalledWith(
+            expect.stringMatching(/ADYEN_API_KEY/),
+          );
+        } finally {
+          consoleSpy.mockRestore();
+        }
+      });
+
+      it('should not warn when the API key comes from the env var in LIVE environment', () => {
+        process.env.ADYEN_API_KEY = 'env-live-key';
+        const consoleSpy = vi
+          .spyOn(console, 'error')
+          .mockImplementation(() => {});
+        try {
+          const args = [
+            '--env',
+            'LIVE',
+            '--livePrefix',
+            'https://example.adyen.com',
+          ];
+          const config = getAdyenConfig(args);
+
+          expect(config.adyenApiKey).toBe('env-live-key');
+          expect(consoleSpy).not.toHaveBeenCalled();
+        } finally {
+          consoleSpy.mockRestore();
+        }
+      });
+    });
+
     describe('validation errors', () => {
       it('should throw error when apiKey is missing', () => {
         const args = ['--env', 'TEST'];
 
-        expect(() => getAdyenConfig(args)).toThrow(/adyenApiKey/i);
+        expect(() => getAdyenConfig(args)).toThrow(/ADYEN_API_KEY/);
       });
 
       it('should throw error when apiKey is empty string', () => {
         const args = ['--adyenApiKey', '', '--env', 'TEST'];
 
-        expect(() => getAdyenConfig(args)).toThrow(/adyenApiKey/i);
+        expect(() => getAdyenConfig(args)).toThrow(/ADYEN_API_KEY/);
       });
 
       it('should throw error when environment is invalid', () => {
@@ -153,7 +235,7 @@ describe('configurations', () => {
 
         expect(() => getAdyenConfig(args)).toThrow();
         expect(consoleSpy).toHaveBeenCalledWith(
-          expect.stringMatching(/adyenApiKey/i),
+          expect.stringMatching(/ADYEN_API_KEY/),
         );
       });
     });
@@ -163,7 +245,7 @@ describe('configurations', () => {
         const args: string[] = [];
 
         // Should use default TEST environment but fail on missing API key
-        expect(() => getAdyenConfig(args)).toThrow(/adyenApiKey/i);
+        expect(() => getAdyenConfig(args)).toThrow(/ADYEN_API_KEY/);
       });
 
       it('should handle null values', () => {
