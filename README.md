@@ -48,21 +48,28 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
     - List all allowed origins - GET [`/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins`](https://docs.adyen.com/api-explorer/Management/3/get/merchants/(merchantId)/apiCredentials/(apiCredentialId)/allowedOrigins)
 
 ### Usage
+* Set the `ADYEN_API_KEY` environment variable without exposing the key in your shell history:
+
+```
+read -s ADYEN_API_KEY
+export ADYEN_API_KEY
+```
+
 * Run the MCP server via `npx` with the following command:
 
 ```
-ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST
+npx -y @adyen/mcp --env=TEST
 ```
 
 If you are using the LIVE environment then you must also provide your [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints/#live-url-prefix), for example:
 
 ```
-ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=LIVE --livePrefix=YOUR_PREFIX_URL
+npx -y @adyen/mcp --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
 We advise to only run a subset of tools required for your particular use case:
 ```
-ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
+npx -y @adyen/mcp --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
 ```
 
 Example usage in `.vscode`:
