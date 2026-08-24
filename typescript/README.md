@@ -49,18 +49,18 @@ The Adyen Model Context Protocol server allows you to integrate with Adyen APIs 
 To run to the MCP server via `npx` you can execute:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST
 ```
 
 Optionally, if the environment is LIVE then you must also provide your Merchant URL, for example:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
 We advise to only run a subset of tools required for your particular use case:
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
 ```
 
 Tools include MCP annotations that identify read-only and destructive operations. Clients can use these hints to request confirmation before invoking write tools.

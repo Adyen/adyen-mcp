@@ -96,6 +96,8 @@ export function getActiveTools(adyenConfig: AdyenConfig): Set<Tool> {
     if (tool) {
       activeTools.add(tool);
     } else {
+      // codeql[js/clear-text-logging] - logs tool names from the --tools
+      // argument, which are not sensitive.
       console.error(
         `❌ Error: Tool '${toolName}' not found.\n` +
           `   👉 All available tools: ${availableToolNames}`,

@@ -51,18 +51,18 @@ The [Adyen Model Context Protocol (MCP) server](https://docs.adyen.com/developme
 * Run the MCP server via `npx` with the following command:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST
 ```
 
 If you are using the LIVE environment then you must also provide your [live URL prefix](https://docs.adyen.com/development-resources/live-endpoints/#live-url-prefix), for example:
 
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=LIVE --livePrefix=YOUR_PREFIX_URL
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=LIVE --livePrefix=YOUR_PREFIX_URL
 ```
 
 We advise to only run a subset of tools required for your particular use case:
 ```
-npx -y @adyen/mcp --adyenApiKey=YOUR_ADYEN_API_KEY --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
+ADYEN_API_KEY=YOUR_ADYEN_API_KEY npx -y @adyen/mcp --env=TEST --tools=list_all_company_webhooks,list_all_merchant_webhooks
 ```
 
 Example usage in `.vscode`:
@@ -72,7 +72,7 @@ Example usage in `.vscode`:
     "adyen-mcp-server": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@adyen/mcp", "--adyenApiKey=YOUR_ADYEN_API_KEY", "--env=TEST"],
+      "args": ["-y", "@adyen/mcp", "--env=TEST"],
       "env": {
         "ADYEN_API_KEY": "${ADYEN_API_KEY}"
       }
