@@ -13,7 +13,9 @@ export enum Environment {
   TEST = 'TEST',
 }
 
-const mandatoryFields = [AdyenOptionKeys.ApiKey, AdyenOptionKeys.Environment];
+export const API_KEY_ENV_VAR = 'ADYEN_API_KEY';
+
+const mandatoryFields = [AdyenOptionKeys.Environment];
 
 export type AdyenConfig = {
   [AdyenOptionKeys.ApiKey]: string;
@@ -51,6 +53,27 @@ const splitAndTrim = (input: string | undefined): string[] | undefined => {
 };
 
 function validateAdyenConfig(options: { [option: string]: any }) {
+  // Prefer the CLI flag, fall back to the environment variable so the key
+  // does not have to appear on argv (ps output, shell history, MCP host configs).
+  const apiKeyFromArg = options[AdyenOptionKeys.ApiKey];
+  if (apiKeyFromArg === undefined || apiKeyFromArg === null) {
+    options[AdyenOptionKeys.ApiKey] = process.env[API_KEY_ENV_VAR];
+  } else if (options[AdyenOptionKeys.Environment] === Environment.LIVE) {
+    console.error(
+      `Warning: for LIVE environments, set the ${API_KEY_ENV_VAR} environment variable to provide your API key securely.`,
+    );
+  }
+
+  if (
+    options[AdyenOptionKeys.ApiKey] === undefined ||
+    options[AdyenOptionKeys.ApiKey] === null ||
+    options[AdyenOptionKeys.ApiKey] === ''
+  ) {
+    throw new Error(
+      `Missing or empty API key: set the ${API_KEY_ENV_VAR} environment variable`,
+    );
+  }
+
   for (const key of mandatoryFields) {
     if (
       options[key] === undefined ||
@@ -99,10 +122,12 @@ export function getAdyenConfig(
     return validateAdyenConfig(parsedOptions);
   } catch (error: any) {
     console.error('\nError parsing command-line arguments:');
+    // codeql[js/clear-text-logging] - parse and validation error messages
+    // never contain the API key value.
     console.error(`  ${error.message}`);
     console.error('\nUsage examples:');
     console.error(
-      `  npx @adyen/mcp --${AdyenOptionKeys.ApiKey} <your-adyen-api-key> --${AdyenOptionKeys.Environment} <your-env>`,
+      `  ${API_KEY_ENV_VAR}=<your-adyen-api-key> npx @adyen/mcp --${AdyenOptionKeys.Environment} <your-env>`,
     );
     throw error;
   }

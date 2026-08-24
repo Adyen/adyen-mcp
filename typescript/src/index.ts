@@ -62,6 +62,8 @@ async function main() {
 }
 
 main().catch((e: unknown) => {
+  // codeql[js/clear-text-logging] - startup error messages do not contain
+  // credentials; the API key is only passed to the Adyen client headers.
   console.error(
     'An error occurred during main execution of Adyen MCP:',
     e instanceof Error ? e.message : e,
