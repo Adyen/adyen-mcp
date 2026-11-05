@@ -6,6 +6,7 @@ export const REFUND_PAYMENT_DESCRIPTION = `Refunds a previously captured payment
         currency (str): A 3 character currency code (e.g., EUR for euros, USD for US dollars). This must match the currency of the original payment.
         value (int): The amount to be refunded, specified in minor units (e.g., 1099 for 10.99 EUR). This must be less than or equal to the captured amount.
         merchantAccount (str): The merchant account identifier used to process the original payment.
+        idempotencyKey (str, optional): Sent to Adyen as the Idempotency-Key header (max 64 characters). If omitted, a key is derived from pspReference, merchantAccount, currency, value and reference.
 
     Returns:
         str: A unique reference for the refund request. The actual outcome (success/failure) is delivered asynchronously via a REFUND webhook.
@@ -14,6 +15,8 @@ export const REFUND_PAYMENT_DESCRIPTION = `Refunds a previously captured payment
         - This endpoint should only be used for payments that have already been captured. If the capture status is uncertain, use the \`reversals\` tool instead.
         - You can refund the full captured amount or perform multiple partial refunds, provided the total refunded amount does not exceed the original captured amount.
         - Support for partial refunds varies by payment method (e.g., cards, iDEAL, Klarna). Check specific payment method documentation for details.
+        - Calling again with the same arguments is safe: the same idempotency key is sent, so Adyen returns the first refund instead of making a second one. To make a second refund with identical details on purpose, pass a new idempotencyKey or a new reference.
+        - If the result starts with "Outcome unknown", the request got no response and the refund may have been made: do not report it as failed; call again with the same arguments and idempotencyKey.
 
     Examples:
         refund_payment("PSP_REFERENCE_XYZ", "EUR", 2500, "your_merchant_account")
@@ -25,12 +28,14 @@ export const CANCEL_PAYMENT_DESCRIPTION = `Cancels an authorisation on a payment
     Args:
         paymentReference (str): The reference of the payment that you want to cancel.
         merchantAccount (str): The merchant account identifier used to process the payment.
+        idempotencyKey (str, optional): Sent to Adyen as the Idempotency-Key header (max 64 characters). If omitted, a key is derived from paymentReference and merchantAccount.
 
     Returns:
         str: A unique reference for the cancellation request. The outcome of the request is delivered asynchronously via a TECHNICAL_CANCEL webhook.
 
     Notes:
         - This endpoint should only be used for payments that have not yet been captured.
+        - Calling again with the same arguments is safe: the same idempotency key is sent, so Adyen returns the first result. If the result starts with "Outcome unknown", call again with the same arguments and idempotencyKey.
         - If you want to cancel a payment using the \`pspReference\`, use the \`/payments/{paymentPspReference}/cancels\` endpoint instead. You must check if a tool is available.
         - If you want to cancel a payment but are not sure whether it has been captured, use the \`/payments/{paymentPspReference}/reversals\` endpoint instead.  You must check if a tool is available.
 
